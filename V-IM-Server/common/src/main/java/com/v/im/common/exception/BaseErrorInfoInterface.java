@@ -1,7 +1,7 @@
 package com.v.im.common.exception;
 
 /**
- * @author zkp
+ * @author 乐天
  */
 public interface BaseErrorInfoInterface {
 

@@ -1,6 +1,5 @@
 package com.v.im.user.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.v.im.common.utils.ChatUtils;
 import com.v.im.user.entity.ImUser;
 import com.v.im.user.service.IImUserFriendService;
@@ -8,10 +7,8 @@ import com.v.im.user.service.IImUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 用户接口类
+ * @author z
+ */
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -53,8 +54,6 @@ public class UserController {
 
         //获取本人信息
         String host = ChatUtils.getHost(request);
-        QueryWrapper<ImUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("login_name", username);
         user.setAvatar(host + user.getAvatar());
         user.setPassword(null);
         objectMap.put("me", user);

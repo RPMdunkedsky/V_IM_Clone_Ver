@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**
- * @author zkp
+ * @author 乐天
  */
 @Data
 public class TreeEntity<T> extends BaseEntity<T> {

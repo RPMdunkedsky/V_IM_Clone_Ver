@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author zkp
+ * @author 乐天
  */
 @RestController
 @RequestMapping("/api/dept")
@@ -82,7 +82,7 @@ public class DeptController {
     }
 
     /**
-     * 单个部门
+     * 单个部门 用户
      *
      * @param deptId deptId
      * @return ImDept
@@ -102,7 +102,6 @@ public class DeptController {
      */
     @PostMapping("delete")
     public boolean delete(String id) {
-        logger.debug("delete dept :" + id);
         return iImDeptService.removeById(id);
     }
 }

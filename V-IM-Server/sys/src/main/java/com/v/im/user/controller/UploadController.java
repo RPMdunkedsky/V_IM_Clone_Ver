@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.v.im.common.utils.ChatUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +22,7 @@ import java.util.UUID;
  * @since 2018-10-07
  */
 @Controller
-@RequestMapping("api")
+@RequestMapping("/api/oss")
 public class UploadController {
 
     @Value("${web.upload-path}")
@@ -34,8 +35,8 @@ public class UploadController {
      * @param request 请求
      * @return json
      */
-    @RequestMapping(value = "upload")
     @ResponseBody
+    @RequestMapping(value = "/upload")
     public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
         JSONObject json = new JSONObject();
         try {

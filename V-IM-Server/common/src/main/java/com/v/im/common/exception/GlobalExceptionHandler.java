@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
- * @author zkp
+ * @author 乐天
  * 全局异常处理函数
  */
 @ControllerAdvice

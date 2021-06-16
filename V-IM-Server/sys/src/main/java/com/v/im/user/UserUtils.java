@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * 用户 Utils 类
- * @author zkp
+ * @author 乐天
  * @since 2019-01-30
  */
 public class UserUtils {

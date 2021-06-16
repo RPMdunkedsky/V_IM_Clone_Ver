@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author zkp
+ * @author 乐天
  */
 @Data
 public class ResultBody<T> implements Serializable {
