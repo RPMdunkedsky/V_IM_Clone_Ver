@@ -1,10 +1,8 @@
 package com.v.im.user.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.v.im.common.utils.ChatUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,8 +10,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+
+import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * 文件上传控制器
@@ -36,28 +39,28 @@ public class UploadController {
      * @return json
      */
     @ResponseBody
-    @RequestMapping(value = "/upload")
-    public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
-        JSONObject json = new JSONObject();
+    @RequestMapping(value = "/upload",method = {OPTIONS,POST})
+    public Map<String, String> upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        Map<String,String> res = new HashMap<>();
         try {
             String host = ChatUtils.getHost(request);
             String fileName = UUID.randomUUID() + "." + file.getOriginalFilename().substring(Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf(".") + 1);
             File targetFile = new File(uploadPath);
             if (!targetFile.exists()) {
                 if (!targetFile.mkdirs()) {
-                    json.put("msg", "error");
-                    return json.toJSONString();
+                    res.put("msg", "error");
+                    return res;
                 }
             }
             File tempFile = new File(uploadPath, fileName);
             file.transferTo(tempFile);
-            json.put("msg", "success");
-            json.put("filePath", host + "/" + fileName);
+            res.put("msg", "success");
+            res.put("filePath", host + "/" + fileName);
         } catch (Exception e) {
             e.printStackTrace();
-            json.put("msg", "error");
-            return json.toJSONString();
+            res.put("msg", "error");
+            return res;
         }
-        return json.toJSONString();
+        return res;
     }
 }
