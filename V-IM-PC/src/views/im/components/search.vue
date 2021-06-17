@@ -60,10 +60,13 @@ export default {
       this.showSearchDiv = true;
     },
     searchUser: function() {
+      console.log('this.searchUserList',this.searchUserList)
+      console.log('this.userList',this.userList)
       this.searchUserList = [];
       for (let i = 0; i < this.userList.length; i++) {
         let name = this.userList[i].name;
         let searchTemp = this.search.trim().toUpperCase();
+        console.log('searchTemp',searchTemp)
         if (searchTemp !== "") {
           // 支持拼音查询
           if (
@@ -95,15 +98,13 @@ export default {
   created: function() {
     let self = this;
     let users = self.$store.state.userFriendList;
+    console.log('this.userFriendList',users)
     if(users){
-      for (let group of users) {
-        if(group.userList){
-          for (let user of group.userList) {
-            self.userList.push(user);
-          }
-        }
+      for (let user of users) {
+        self.userList.push(user);
       }
     }
+    console.log('this.userFriendList',self.userList)
   }
 };
 </script>
