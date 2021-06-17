@@ -15,6 +15,10 @@ export function formatDateTime(date) {
   return y + "-" + m + "-" + d + " " + h + ":" + minute + ":" + second;
 }
 
+export function isGroupChat(chat) {
+  return chat.type === '1'
+}
+
 /**
  * 毫秒转换友好的显示格式
  * 输出格式：21小时前

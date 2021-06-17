@@ -42,51 +42,14 @@
         <div class="im-chat-footer">
           <div class="im-chat-tool">
             <Icon type="ios-happy-outline" @click="showFaceBox()"></Icon>
-            <Upload
-              :action="action"
-              name="file"
-              :format="imgFormat"
-              :data="tokenImg"
-              :show-upload-list="false"
-              :headers="headers"
-              :max-size="5120"
-              :with-credentials="true"
-              :before-upload="beforeUpload"
-              :on-progress="handleStart"
-              :on-format-error="handleFormatError"
-              :on-exceeded-size="handleImgMaxSize"
-              :on-success="handleSuccess"
-              :on-error="handleError"
-            >
-              <Icon type="ios-image-outline"></Icon>
-            </Upload>
-            <Upload
-              :action="action"
-              name="file"
-              :format="fileFormat"
-              :data="tokenFile"
-              :show-upload-list="false"
-              :headers="headers"
-              :max-size="102400"
-              :with-credentials="true"
-              :before-upload="beforeUpload"
-              :on-progress="handleStart"
-              :on-format-error="handleFormatError"
-              :on-exceeded-size="handleFileMaxSize"
-              :on-success="handleSuccess"
-              :on-error="handleError"
-            >
-              <Icon type="ios-folder-open-outline"></Icon>
-            </Upload>
+            <upload-tool @uploadBack="uploadBack"></upload-tool>
             <Faces
               v-show="showFace"
               @click="showFace = true"
               class="faces-box"
               @insertFace="insertFace"
             ></Faces>
-            <Button class="history-message-btn" @click="getHistoryMessage()"
-              >聊天记录
-            </Button>
+            <Button class="history-message-btn" @click="history">聊天记录</Button>
           </div>
           <textarea
             v-model="messageContent"
@@ -98,7 +61,7 @@
           </div>
         </div>
       </div>
-      <div v-if="chat.type === '1'" class="im-chat-users">
+      <div v-if="isGroup" class="im-chat-users">
         <ul class="chat-user-list">
           <li
             v-for="(item, index) in userList"
@@ -121,10 +84,10 @@
       title="信息"
       width="300"
     >
-      <div v-if="chat.type === '0'">
+      <div v-if="!isGroup">
         <UserModal :userId="chat.id"></UserModal>
       </div>
-      <div v-if="chat.type === '1'">
+      <div v-if="isGroup">
         <p class="user-model-img">
           <img :src="chat.avatar" class="img" />
         </p>
@@ -147,50 +110,15 @@
         <Button @click="showChat(groupUser)">发送消息</Button>
       </div>
     </Modal>
+
     <Drawer
-      title="聊天记录"
-      :closable="true"
-      v-model="showHistory"
-      class="history-message"
-      width="60%"
+        title="聊天记录"
+        :closable="true"
+        v-model="showHistory"
+        class="history-message"
+        width="60%"
     >
-      <div class="im-chat-main">
-        <div class="messages" id="his-chat-message">
-          <ul>
-            <li
-              v-for="(item, index) in hisMessageList"
-              :key="index"
-              :class="{ 'im-chat-mine': item.mine }"
-            >
-              <div class="im-chat-user" id="historyMessageBox">
-                <img :src="[host + item.avatar]" />
-                <div class="message-info" v-if="item.mine">
-                  <i>{{ item.timestamp }}</i>
-                  <span>{{ item.username }}</span>
-                </div>
-                <div class="message-info" v-if="!item.mine">
-                  <span>{{ item.username }}</span>
-                  <i>{{ item.timestamp }}</i>
-                </div>
-              </div>
-              <div class="im-chat-text">
-                <pre
-                  v-html="item.content"
-                  v-on:click="openImageProxy($event)"
-                ></pre>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <Page
-        :total="count"
-        size="small"
-        show-total
-        class="page"
-        :page-size="pageSize"
-        @on-change="getHistoryMessage"
-      />
+      <history-message :showHistory="showHistory" :chat="chat"></history-message>
     </Drawer>
   </div>
 </template>
@@ -199,20 +127,22 @@
 import conf from "../conf";
 import Faces from "./faces.vue";
 import UserModal from "./userModal.vue";
+import UploadTool from "./uploadTool.vue";
+import HistoryMessage from "./historyMessage.vue";
 import RequestUtils from "../../../utils/RequestUtils";
-import StoreUtils from "../../../utils/StoreUtils";
-import { MessageTargetType } from "../../../utils/ChatUtils";
-
-const {
+import {
+  isGroupChat,
+  MessageTargetType,
   imageLoad,
-  transform,
   ChatListUtils
-} = require("../../../utils/ChatUtils");
+} from "../../../utils/ChatUtils";
 
 export default {
   components: {
     Faces,
-    UserModal
+    UserModal,
+    HistoryMessage,
+    UploadTool
   },
   name: "userChat",
   computed: {
@@ -233,48 +163,36 @@ export default {
       modal: false,
       groupUserModel: false,
       groupUser: {},
-      showHistory: false,
-      hisMessageList: [],
       // 保存各个聊天记录的map
       messageListMap: new Map(),
       messageContent: "",
       showFace: false,
+      showHistory: false,
       userList: [],
-      imgFormat: ["jpg", "jpeg", "png", "gif"],
-      fileFormat: [
-        "doc",
-        "docx",
-        "jpg",
-        "jpeg",
-        "png",
-        "gif",
-        "xls",
-        "xlsx",
-        "pdf",
-        "gif",
-        "exe",
-        "msi",
-        "swf",
-        "sql",
-        "apk",
-        "psd"
-      ],
-      tokenImg: {
-        access_token: StoreUtils.getAccessToken(),
-        type: "image"
-      },
-      tokenFile: {
-        access_token: StoreUtils.getAccessToken(),
-        type: "file"
-      },
-      action: conf.getHostUrl() + "/api/oss/upload",
-      headers: {
-        "Access-Control-Allow-Origin": "*"
-      }
+      isGroup: false
     };
   },
   props: ["chat"],
   methods: {
+    history() {
+      this.showHistory = !this.showHistory;
+    },
+    uploadBack(url) {
+      this.messageContent += url;
+    },
+    // 附件和图片点击展开
+    openImageProxy: function(event) {
+      let self = this;
+      event.preventDefault();
+      if (event.target.nodeName === "IMG") {
+        self.winControl.openURL(event.target.src);
+      } else if (
+          event.target.className === "message-file" ||
+          event.target.nodeName === "A"
+      ) {
+        self.winControl.openURL(event.target.href);
+      }
+    },
     showChat(user) {
       let self = this;
       if (user.id !== self.$store.state.user.id) {
@@ -284,6 +202,7 @@ export default {
           conf.getHostUrl(),
           MessageTargetType.FRIEND
         );
+        self.isGroup = isGroupChat(chat);
         self.$store.commit("setCurrentChat", JSON.parse(JSON.stringify(chat)));
       } else {
         self.$Message.warning("不能给自己说话哦");
@@ -295,85 +214,12 @@ export default {
       self.groupUserModel = true;
       self.groupUser = user;
     },
-    beforeUpload() {
-      this.tokenImg = {
-        access_token: StoreUtils.getAccessToken(),
-        type: "image"
-      };
-      this.tokenFile = {
-        access_token: StoreUtils.getAccessToken(),
-        type: "file"
-      };
-      return new Promise(resolve => {
-        this.$nextTick(function() {
-          resolve(true);
-        });
-      });
-    },
-
-    // 错误提示
-    openMessage(error) {
-      this.$Message.error(error);
-    },
     showFaceBox: function() {
       this.showFace = !this.showFace;
     },
     insertFace: function(item) {
       this.messageContent = this.messageContent + "face" + item;
       this.showFace = false;
-    },
-    handleStart() {
-      this.$Loading.start();
-    },
-    handleFormatError(file) {
-      this.$Message.warning("文件 " + file.name + " 格式不正确。");
-    },
-    handleImgMaxSize(file) {
-      this.$Message.warning("图片 " + file.name + " 太大，不能超过 512K！");
-    },
-    handleFileMaxSize(file) {
-      this.$Message.warning("文件 " + file.name + " 太大，不能超过 10M！");
-    },
-    handleSuccess(res, file) {
-      let self = this;
-      if (res.msg === "success") {
-        let path = res.filePath;
-        let fileName = file.name;
-        // 文件后缀
-        let suffix = fileName.substring(
-          fileName.lastIndexOf(".") + 1,
-          fileName.length
-        );
-        // 文件
-        if (self.imgFormat.indexOf(suffix) === -1) {
-          this.messageContent =
-            this.messageContent + "file(" + path + ")[" + fileName + "]";
-        }
-        // 图片
-        else {
-          this.messageContent = this.messageContent + "img[" + path + "]";
-        }
-        this.$Loading.finish();
-      } else {
-        this.$Message.error("文件上传错误，请重试");
-      }
-    },
-    handleError: function() {
-      this.$Loading.finish();
-      this.$Message.error("上传错误！");
-    },
-    // 附件和图片点击展开
-    openImageProxy: function(event) {
-      let self = this;
-      event.preventDefault();
-      if (event.target.nodeName === "IMG") {
-        self.winControl.openURL(event.target.src);
-      } else if (
-        event.target.className === "message-file" ||
-        event.target.nodeName === "A"
-      ) {
-        self.winControl.openURL(event.target.href);
-      }
     },
     // 本人发送信息
     mineSend() {
@@ -411,45 +257,22 @@ export default {
         imageLoad("message-box");
       });
     },
-    getHistoryMessage(pageNo) {
+
+    initGroupChat() {
       let self = this;
-      self.showHistory = true;
-      if (!pageNo) {
-        pageNo = 1;
-      }
-      let param = new FormData();
-      param.set("chatId", self.chat.id);
-      param.set("chatType", self.chat.type);
-      param.set("fromId", self.$store.state.user.id);
-      param.set("pageNo", pageNo);
-
-      let requestApi = RequestUtils;
-      requestApi
-        .request(conf.getHisUrl(), param)
-
-        .then(json => {
-          let list = json.messageList.map(function(element) {
-            element.content = transform(element.content);
-            return element;
-          });
-          let tempList = list.map(function(message) {
-            message.timestamp = self.formatDateTime(
-              new Date(message.timestamp)
-            );
-            return message;
-          });
-          self.hisMessageList = tempList.reverse();
-          self.count = json.count;
-          self.pageSize = json.pageSize;
-          // 每次滚动到最底部
-          self.$nextTick(() => {
-            imageLoad("his-chat-message");
-          });
+      //群组聊天
+      if (isGroupChat(self.chat)) {
+        let param = new FormData();
+        param.set("chatId", self.chat.id);
+        RequestUtils.request(conf.getChatUsersUrl(), param).then(json => {
+          self.userList = json;
         });
+      }
+      self.isGroup = isGroupChat(self.chat);
     }
   },
   watch: {
-    // 监听每次 user 的变化
+    // 监听每次 chat 的变化
     chat: function() {
       let self = this;
       self.messageList = [];
@@ -462,21 +285,17 @@ export default {
       this.$nextTick(() => {
         imageLoad("message-box");
       });
-      if (self.chat.type === "1") {
-        let param = new FormData();
-        param.set("chatId", self.chat.id);
-        RequestUtils.request(conf.getChatUsersUrl(), param).then(json => {
-          self.userList = json;
-        });
-      }
+      self.initGroupChat();
     }
   },
   mounted: function() {
+    let self = this;
+
+    self.initGroupChat();
     // 每次滚动到最底部
     this.$nextTick(() => {
       imageLoad("message-box");
     });
-    console.log("this.chat", this.chat);
   }
 };
 </script>
