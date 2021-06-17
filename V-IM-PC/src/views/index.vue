@@ -64,6 +64,7 @@
 </template>
 <script>
 import { logout } from "../utils/ChatUtils";
+import RequestUtils from "@/utils/RequestUtils";
 
 export default {
   data() {
@@ -79,6 +80,7 @@ export default {
     }
   },
   created: function() {
+    RequestUtils.webSocketOperation(this);
     this.user = this.$store.state.user;
   },
   mounted: function() {}

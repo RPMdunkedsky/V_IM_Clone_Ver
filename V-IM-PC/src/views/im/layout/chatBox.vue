@@ -35,7 +35,6 @@ import {
   imageLoad,
   MessageTargetType
 } from "../../../utils/ChatUtils";
-import RequestUtils from "../../../utils/RequestUtils";
 import conf from "../conf";
 
 export default {
@@ -118,7 +117,6 @@ export default {
     });
   },
   mounted: function() {
-    RequestUtils.webSocketOperation(this);
     console.log(this.chatList);
   }
 };
