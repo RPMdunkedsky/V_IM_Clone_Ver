@@ -168,7 +168,6 @@ export default {
       overflow-y: scroll;
       margin-top: 4rem;
       .dept-user-list {
-
         display: flex;
         flex-wrap: wrap;
         justify-content: left;

@@ -136,7 +136,7 @@ export default {
           url = "img[" + path + "]";
         }
         //给父类传值
-        self.$emit("uploadBack",url);
+        self.$emit("uploadBack", url);
 
         this.$Loading.finish();
       } else {
@@ -152,7 +152,7 @@ export default {
 </script>
 
 <style scoped>
-  .upload-tool{
-    display: inline-block;
-  }
+.upload-tool {
+  display: inline-block;
+}
 </style>

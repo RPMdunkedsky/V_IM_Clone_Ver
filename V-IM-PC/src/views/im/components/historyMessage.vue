@@ -4,9 +4,9 @@
       <div class="messages" id="his-chat-message">
         <ul>
           <li
-              v-for="(item, index) in hisMessageList"
-              :key="index"
-              :class="{ 'im-chat-mine': item.mine }"
+            v-for="(item, index) in hisMessageList"
+            :key="index"
+            :class="{ 'im-chat-mine': item.mine }"
           >
             <div class="im-chat-user" id="historyMessageBox">
               <img :src="[host + item.avatar]" />
@@ -21,8 +21,8 @@
             </div>
             <div class="im-chat-text">
               <pre
-                  v-html="item.content"
-                  v-on:click="openImageProxy($event)"
+                v-html="item.content"
+                v-on:click="openImageProxy($event)"
               ></pre>
             </div>
           </li>
@@ -30,12 +30,12 @@
       </div>
     </div>
     <Page
-        :total="count"
-        size="small"
-        show-total
-        class="page"
-        :page-size="pageSize"
-        @on-change="getHistoryMessage"
+      :total="count"
+      size="small"
+      show-total
+      class="page"
+      :page-size="pageSize"
+      @on-change="getHistoryMessage"
     />
   </div>
 </template>
@@ -43,18 +43,18 @@
 <script>
 import RequestUtils from "@/utils/RequestUtils";
 import conf from "@/views/im/conf";
-import { transform,imageLoad } from "../../../utils/ChatUtils";
+import { transform, imageLoad } from "../../../utils/ChatUtils";
 
 export default {
   name: "history-message",
-  props:{
-    showHistory:{
-      type:Boolean,
-      default:false
+  props: {
+    showHistory: {
+      type: Boolean,
+      default: false
     },
-    chat:{
-      type:Object,
-      default:null
+    chat: {
+      type: Object,
+      default: null
     }
   },
   data() {
@@ -65,17 +65,16 @@ export default {
       hisMessageList: []
     };
   },
-  watch:{
-    showHistory:function (show){
-      console.log('show',show)
+  watch: {
+    showHistory: function(show) {
+      console.log("show", show);
       this.showHistory = show;
-      if(show){
-        this.getHistoryMessage(1)
+      if (show) {
+        this.getHistoryMessage(1);
       }
     }
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     getHistoryMessage(pageNo) {
       let self = this;
@@ -96,11 +95,11 @@ export default {
           let list = json.messageList.map(function(element) {
             element.content = transform(element.content);
             element.timestamp = self.formatDateTime(
-                new Date(element.timestamp)
+              new Date(element.timestamp)
             );
             return element;
           });
-          console.log(list)
+          console.log(list);
           self.hisMessageList = list.reverse();
           self.count = json.count;
           self.pageSize = json.pageSize;

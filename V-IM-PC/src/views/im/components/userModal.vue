@@ -16,7 +16,6 @@
         <label>邮箱：</label>
         <span>{{ user.email }}</span>
       </p>
-
     </div>
   </div>
 </template>
@@ -43,7 +42,6 @@ export default {
     this.getUser(this.userId);
   },
   methods: {
-
     getUser(id) {
       let self = this;
       let param = new FormData();

@@ -16,7 +16,7 @@ export function formatDateTime(date) {
 }
 
 export function isGroupChat(chat) {
-  return chat.type === '1'
+  return chat.type === "1";
 }
 
 /**

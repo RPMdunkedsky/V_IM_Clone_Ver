@@ -49,7 +49,9 @@
               class="faces-box"
               @insertFace="insertFace"
             ></Faces>
-            <Button class="history-message-btn" @click="history">聊天记录</Button>
+            <Button class="history-message-btn" @click="history"
+              >聊天记录</Button
+            >
           </div>
           <textarea
             v-model="messageContent"
@@ -112,13 +114,16 @@
     </Modal>
 
     <Drawer
-        title="聊天记录"
-        :closable="true"
-        v-model="showHistory"
-        class="history-message"
-        width="60%"
+      title="聊天记录"
+      :closable="true"
+      v-model="showHistory"
+      class="history-message"
+      width="60%"
     >
-      <history-message :showHistory="showHistory" :chat="chat"></history-message>
+      <history-message
+        :showHistory="showHistory"
+        :chat="chat"
+      ></history-message>
     </Drawer>
   </div>
 </template>
@@ -187,8 +192,8 @@ export default {
       if (event.target.nodeName === "IMG") {
         self.winControl.openURL(event.target.src);
       } else if (
-          event.target.className === "message-file" ||
-          event.target.nodeName === "A"
+        event.target.className === "message-file" ||
+        event.target.nodeName === "A"
       ) {
         self.winControl.openURL(event.target.href);
       }
