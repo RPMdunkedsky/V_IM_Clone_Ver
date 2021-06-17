@@ -139,7 +139,7 @@ import {
   isGroupChat,
   MessageTargetType,
   imageLoad,
-  ChatListUtils
+  ChatListUtils, transform
 } from "../../../utils/ChatUtils";
 
 export default {
@@ -274,6 +274,31 @@ export default {
         });
       }
       self.isGroup = isGroupChat(self.chat);
+    },
+    getHistoryMessage(pageNo) {
+      let self = this;
+      if (!pageNo) {
+        pageNo = 1;
+      }
+      let param = new FormData();
+      param.set("chatId", self.chat.id);
+      param.set("chatType", self.chat.type);
+      param.set("fromId", self.$store.state.user.id);
+      param.set("pageNo", pageNo);
+
+      RequestUtils
+          .request(conf.getHisUrl(), param)
+          .then(json => {
+            let list = json.messageList.map(function(element) {
+              element.content = transform(element.content);
+              element.timestamp = self.formatDateTime(
+                  new Date(element.timestamp)
+              );
+              return element;
+            });
+            self.messageList = list;
+
+          });
     }
   },
   watch: {
@@ -285,6 +310,8 @@ export default {
       let cacheMessages = self.$store.state.messageListMap[self.chat.id];
       if (cacheMessages) {
         self.messageList = cacheMessages;
+      }else {
+        self.getHistoryMessage(1);
       }
       // 每次滚动到最底部
       this.$nextTick(() => {

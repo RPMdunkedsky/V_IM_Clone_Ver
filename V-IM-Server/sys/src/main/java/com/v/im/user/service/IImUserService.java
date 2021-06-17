@@ -15,16 +15,25 @@ import java.util.List;
 public interface IImUserService extends IService<ImUser> {
 
     /**
+     * 获取单个user
+     *
+     * @param id id
+     * @return 字符串
+     */
+    ImUser getById(String id);
+
+    /**
      * 根据登录名称获取用户
+     *
      * @param loginName 登录名
      * @return 用户
      */
     ImUser getByLoginName(String loginName);
 
 
-
     /**
      * 根据用户id 获取用户所有的群
+     *
      * @param userId 用户
      * @return 群List
      */
@@ -32,6 +41,7 @@ public interface IImUserService extends IService<ImUser> {
 
     /**
      * 获取群组的用户
+     *
      * @param chatId 群组id
      * @return 用户List
      */
@@ -40,6 +50,7 @@ public interface IImUserService extends IService<ImUser> {
 
     /**
      * 注册用户
+     *
      * @param imUser 用户对象
      */
     void registerUser(ImUser imUser);

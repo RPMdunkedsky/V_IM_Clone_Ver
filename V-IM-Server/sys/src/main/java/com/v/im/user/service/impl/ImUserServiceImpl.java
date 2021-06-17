@@ -9,6 +9,7 @@ import com.v.im.user.service.IImUserFriendService;
 import com.v.im.user.service.IImUserService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,10 @@ public class ImUserServiceImpl extends ServiceImpl<ImUserMapper, ImUser> impleme
     @Value("${v.im.default.chat.id}")
     private String defaultChatId;
 
-
+    @Override
+    public ImUser getById(String id) {
+        return super.getById(id);
+    }
 
     @Resource
     @Qualifier(value = "imUserFriendService")

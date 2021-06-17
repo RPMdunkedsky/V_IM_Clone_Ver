@@ -76,6 +76,19 @@ export default {
   },
   mounted() {},
   methods: {
+    // 附件和图片点击展开
+    openImageProxy: function(event) {
+      let self = this;
+      event.preventDefault();
+      if (event.target.nodeName === "IMG") {
+        self.winControl.openURL(event.target.src);
+      } else if (
+          event.target.className === "message-file" ||
+          event.target.nodeName === "A"
+      ) {
+        self.winControl.openURL(event.target.href);
+      }
+    },
     getHistoryMessage(pageNo) {
       let self = this;
       if (!pageNo) {
@@ -87,11 +100,10 @@ export default {
       param.set("fromId", self.$store.state.user.id);
       param.set("pageNo", pageNo);
 
-      let requestApi = RequestUtils;
-      requestApi
+      RequestUtils
         .request(conf.getHisUrl(), param)
-
         .then(json => {
+          console.log(json)
           let list = json.messageList.map(function(element) {
             element.content = transform(element.content);
             element.timestamp = self.formatDateTime(
@@ -99,7 +111,6 @@ export default {
             );
             return element;
           });
-          console.log(list);
           self.hisMessageList = list.reverse();
           self.count = json.count;
           self.pageSize = json.pageSize;

@@ -1,32 +1,32 @@
 <template>
   <div>
     <Input
-        search
-        v-model="search"
-        placeholder="搜索"
-        size="small"
-        class="search"
-        @on-focus="showSearch()"
+      search
+      v-model="search"
+      placeholder="搜索"
+      size="small"
+      class="search"
+      @on-focus="showSearch()"
     />
     <div class="search-div" v-show="showSearchDiv">
       <div class="search-item">
         <Input
-            search
-            v-model="search"
-            placeholder="搜索"
-            size="small"
-            class="search"
-            @on-search="searchUser"
-            @on-keyup="searchUser"
+          search
+          v-model="search"
+          placeholder="搜索"
+          size="small"
+          class="search"
+          @on-search="searchUser"
+          @on-keyup="searchUser"
         />
         <Icon
-            type="ios-close"
-            class="text-right"
-            @click="closeSearchDiv()"
+          type="ios-close"
+          class="text-right"
+          @click="closeSearchDiv()"
         ></Icon>
       </div>
       <div class="group-box">
-        <ul class="user-list" v-if="searchUserList" >
+        <ul class="user-list" v-if="searchUserList">
           <li class="user" v-for="(user, index) in searchUserList" :key="index">
             <a href="javascript:" @click="showChat(user)">
               <img :src="user.avatar" alt="头像" />
@@ -67,16 +67,16 @@ export default {
         if (searchTemp !== "") {
           // 支持拼音查询
           if (
-              name.indexOf(searchTemp) !== -1 ||
-              pinyin
-                  .getFullChars(name)
-                  .toUpperCase()
-                  .indexOf(searchTemp) !== -1 ||
-              pinyin.getCamelChars(name).indexOf(searchTemp) !== -1
+            name.indexOf(searchTemp) !== -1 ||
+            pinyin
+              .getFullChars(name)
+              .toUpperCase()
+              .indexOf(searchTemp) !== -1 ||
+            pinyin.getCamelChars(name).indexOf(searchTemp) !== -1
           ) {
             if (this.userList[i].avatar.indexOf("http") !== 0) {
               this.userList[i].avatar =
-                  conf.getHostUrl() + this.userList[i].avatar;
+                conf.getHostUrl() + this.userList[i].avatar;
             }
             this.userList[i].type = "0";
             this.searchUserList.push(this.userList[i]);
@@ -95,7 +95,7 @@ export default {
   created: function() {
     let self = this;
     let users = self.$store.state.userFriendList;
-    if(users){
+    if (users) {
       for (let user of users) {
         self.userList.push(user);
       }
