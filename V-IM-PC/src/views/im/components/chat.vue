@@ -294,10 +294,16 @@ export default {
               element.timestamp = self.formatDateTime(
                   new Date(element.timestamp)
               );
+              if(element.avatar.indexOf("http")===-1){
+                element.avatar = self.host + element.avatar;
+              }
               return element;
             });
             self.messageList = list;
-
+            // 每次滚动到最底部
+            self.$nextTick(() => {
+              imageLoad("message-box");
+            });
           });
     }
   },
