@@ -1,7 +1,7 @@
 <template>
   <div style="height: calc(100% - 40px);">
-    <div class="im-chat-main">
-      <div class="messages" id="his-chat-message">
+    <div class="im-chat-main" style="height: 100%">
+      <div class="messages" id="his-chat-message"  style="height: 100%">
         <ul>
           <li
             v-for="(item, index) in hisMessageList"
