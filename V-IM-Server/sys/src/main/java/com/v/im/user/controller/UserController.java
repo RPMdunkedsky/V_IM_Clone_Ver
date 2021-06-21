@@ -1,6 +1,7 @@
 package com.v.im.user.controller;
 
 import com.v.im.common.utils.ChatUtils;
+import com.v.im.user.UserUtils;
 import com.v.im.user.entity.ImUser;
 import com.v.im.user.service.IImUserFriendService;
 import com.v.im.user.service.IImUserService;
@@ -48,8 +49,7 @@ public class UserController {
         logger.debug("init");
         Map<String, Object> objectMap = new HashMap<>();
         //获取好友信息
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        ImUser user = imUserService.getByLoginName(username);
+        ImUser user = UserUtils.getUser();
         objectMap.put("friends", imUserFriendService.getUserFriends(user.getId()));
 
         //获取本人信息
@@ -76,13 +76,14 @@ public class UserController {
     }
 
     /**
-     * 单个用户
+     * 获取自己
      *
-     * @param id userId
      * @return ImUser
      */
     @PostMapping("get")
-    public ImUser get(String id) {
-        return imUserService.getById(id);
+    public ImUser get() {
+        ImUser imUser = UserUtils.getUser();
+        imUser.setPassword("");
+        return imUser;
     }
 }
