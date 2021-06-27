@@ -78,7 +78,6 @@ public class UserController {
 
     /**
      * 获取自己
-     *
      * @return ImUser
      */
     @RequestMapping("get")
