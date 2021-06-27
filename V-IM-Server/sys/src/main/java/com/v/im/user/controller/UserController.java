@@ -8,6 +8,7 @@ import com.v.im.user.service.IImUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -80,10 +81,8 @@ public class UserController {
      *
      * @return ImUser
      */
-    @PostMapping("get")
-    public ImUser get() {
-        ImUser imUser = UserUtils.getUser();
-        imUser.setPassword("");
-        return imUser;
+    @RequestMapping("get")
+    public ImUser get(String id) {
+        return imUserService.getById(id);
     }
 }
