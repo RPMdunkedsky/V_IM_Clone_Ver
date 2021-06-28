@@ -43,4 +43,7 @@ public class ImUser  extends BaseEntity<ImUser> implements Serializable {
 
     @TableField("dept_id")
     private String deptId;
+
+    @TableField(exist = false)
+    private String depts;
 }

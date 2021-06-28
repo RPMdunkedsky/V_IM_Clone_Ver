@@ -2,7 +2,9 @@ package com.v.im.user.controller;
 
 import com.v.im.common.utils.ChatUtils;
 import com.v.im.user.UserUtils;
+import com.v.im.user.entity.ImDept;
 import com.v.im.user.entity.ImUser;
+import com.v.im.user.service.IImDeptService;
 import com.v.im.user.service.IImUserFriendService;
 import com.v.im.user.service.IImUserService;
 import org.slf4j.Logger;
@@ -34,6 +36,10 @@ public class UserController {
     @Resource
     @Qualifier(value = "imUserService")
     private IImUserService imUserService;
+
+    @Resource
+    @Qualifier(value = "imDeptService")
+    private IImDeptService iImDeptService;
 
     @Resource
     @Qualifier(value = "imUserFriendService")
@@ -82,6 +88,9 @@ public class UserController {
      */
     @RequestMapping("get")
     public ImUser get(String id) {
-        return imUserService.getById(id);
+        ImUser imUser = imUserService.getById(id);
+        ImDept dept = iImDeptService.getById(imUser.getDeptId());
+        imUser.setDepts(iImDeptService.getDepts(dept.getParentIds())+"," + dept.getName());
+        return imUser;
     }
 }

@@ -13,4 +13,5 @@ import com.v.im.user.entity.ImDept;
  */
 public interface IImDeptService extends IService<ImDept> {
 
+    public String getDepts(String deptIds);
 }
