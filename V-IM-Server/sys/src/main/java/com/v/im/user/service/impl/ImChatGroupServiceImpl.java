@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2018-10-28
  */
 @Service
-@Qualifier("imChatGroupServiceImpl")
+@Qualifier("imChatGroupService")
 public class ImChatGroupServiceImpl extends ServiceImpl<ImChatGroupMapper, ImChatGroup> implements IImChatGroupService {
 
 }

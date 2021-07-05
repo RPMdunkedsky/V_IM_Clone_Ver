@@ -43,10 +43,12 @@ function WebsocketHeartbeatJs({
 
 WebsocketHeartbeatJs.prototype.createWebSocket = function() {
   try {
-    this.ws = new WebSocket(
-      this.opts.url + "?token=" + StoreUtils.getAccessToken()
-    );
-    this.initEventHandle();
+    if(this.ws==null){
+      this.ws = new WebSocket(
+          this.opts.url + "?token=" + StoreUtils.getAccessToken()
+      );
+      this.initEventHandle();
+    }
   } catch (e) {
     this.reconnect();
     throw e;

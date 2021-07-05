@@ -27,9 +27,8 @@ public class ImDeptServiceImpl extends ServiceImpl<ImDeptMapper, ImDept> impleme
     @Override
     public String getDepts(String deptIds) {
         if(StrUtil.isNotBlank(deptIds)){
-            String[] ids = deptIds.split(",");
             QueryWrapper<ImDept> wrapper = new QueryWrapper<>();
-            wrapper.in("id",ids);
+            wrapper.in("id",deptIds.split(","));
             List<ImDept> deptList = super.list(wrapper);
             return deptList.stream().map(ImDept::getName).collect(Collectors.joining(","));
         }
