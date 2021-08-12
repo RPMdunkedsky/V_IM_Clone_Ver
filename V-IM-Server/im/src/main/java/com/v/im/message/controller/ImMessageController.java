@@ -62,8 +62,7 @@ public class ImMessageController {
         }
         page.setCurrent(pageNo);
         QueryWrapper<ImMessage> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("send_time");
-        System.out.println(FRIEND);
+        wrapper.orderByDesc("id");
         if(FRIEND.equals(chatType)){
             wrapper.and(wrapper1 -> wrapper1.eq("to_id", chatId)
                     .eq("from_id", fromId));
@@ -87,7 +86,7 @@ public class ImMessageController {
             message.setFromid(imMessage.getFromId());
             message.setCid(String.valueOf(imMessage.getId()));
             message.setContent(imMessage.getContent());
-            message.setTimestamp(System.currentTimeMillis());
+            message.setTimestamp(imMessage.getSendTime());
             messageList.add(message);
         }
         Map<String, Object> map = new HashMap<>();
