@@ -44,6 +44,19 @@
 ![组织](doc/img/7.PNG)
 
 
+### 手机版（暂未开源，进群联系技术 乐天）
+
+![登录](doc/mobile/1.PNG)
+![消息列表](doc/mobile/2.PNG)
+![聊天](doc/mobile/3.PNG)
+![群组](doc/mobile/4.PNG)
+![好友](doc/mobile/5.PNG)
+![组织](doc/mobile/6.PNG)
+![我的](doc/mobile/7.PNG)
+![信息](doc/mobile/8.PNG)
+![群聊](doc/mobile/9.PNG)
+
+
 ### 功能点
 > 1. 文本聊天
 > 2. 聊天表情
