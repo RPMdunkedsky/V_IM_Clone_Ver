@@ -1,7 +1,7 @@
 <template>
   <div style="height: calc(100% - 40px);">
     <div class="im-chat-main" style="height: 100%">
-      <div class="messages" id="his-chat-message"  style="height: 100%">
+      <div class="messages" id="his-chat-message" style="height: 100%">
         <ul>
           <li
             v-for="(item, index) in hisMessageList"
@@ -83,8 +83,8 @@ export default {
       if (event.target.nodeName === "IMG") {
         self.winControl.openURL(event.target.src);
       } else if (
-          event.target.className === "message-file" ||
-          event.target.nodeName === "A"
+        event.target.className === "message-file" ||
+        event.target.nodeName === "A"
       ) {
         self.winControl.openURL(event.target.href);
       }
@@ -100,25 +100,20 @@ export default {
       param.set("fromId", self.$store.state.user.id);
       param.set("pageNo", pageNo);
 
-      RequestUtils
-        .request(conf.getHisUrl(), param)
-        .then(json => {
-          console.log(json)
-          let list = json.messageList.map(function(element) {
-            element.content = transform(element.content);
-            element.timestamp = self.formatDateTime(
-              new Date(element.timestamp)
-            );
-            return element;
-          });
-          self.hisMessageList = list.reverse();
-          self.count = json.count;
-          self.pageSize = json.pageSize;
-          // 每次滚动到最底部
-          self.$nextTick(() => {
-            imageLoad("his-chat-message");
-          });
+      RequestUtils.request(conf.getHisUrl(), param).then(json => {
+        let list = json.messageList.map(function(element) {
+          element.content = transform(element.content);
+          element.timestamp = self.formatDateTime(new Date(element.timestamp));
+          return element;
         });
+        self.hisMessageList = list.reverse();
+        self.count = json.count;
+        self.pageSize = json.pageSize;
+        // 每次滚动到最底部
+        self.$nextTick(() => {
+          imageLoad("his-chat-message");
+        });
+      });
     }
   }
 };

@@ -139,7 +139,8 @@ import {
   isGroupChat,
   MessageTargetType,
   imageLoad,
-  ChatListUtils, transform
+  ChatListUtils,
+  transform
 } from "../../../utils/ChatUtils";
 
 export default {
@@ -286,25 +287,21 @@ export default {
       param.set("fromId", self.$store.state.user.id);
       param.set("pageNo", pageNo);
 
-      RequestUtils
-          .request(conf.getHisUrl(), param)
-          .then(json => {
-            let list = json.messageList.map(function(element) {
-              element.content = transform(element.content);
-              element.timestamp = self.formatDateTime(
-                  new Date(element.timestamp)
-              );
-              if(element.avatar.indexOf("http")===-1){
-                element.avatar = self.host + element.avatar;
-              }
-              return element;
-            });
-            self.messageList = list;
-            // 每次滚动到最底部
-            self.$nextTick(() => {
-              imageLoad("message-box");
-            });
-          });
+      RequestUtils.request(conf.getHisUrl(), param).then(json => {
+        let list = json.messageList.map(function(element) {
+          element.content = transform(element.content);
+          element.timestamp = self.formatDateTime(new Date(element.timestamp));
+          if (element.avatar.indexOf("http") === -1) {
+            element.avatar = self.host + element.avatar;
+          }
+          return element;
+        });
+        self.messageList = list.reverse();
+        // 每次滚动到最底部
+        self.$nextTick(() => {
+          imageLoad("message-box");
+        });
+      });
     }
   },
   watch: {
@@ -316,7 +313,7 @@ export default {
       let cacheMessages = self.$store.state.messageListMap[self.chat.id];
       if (cacheMessages) {
         self.messageList = cacheMessages;
-      }else {
+      } else {
         self.getHistoryMessage(1);
       }
       // 每次滚动到最底部

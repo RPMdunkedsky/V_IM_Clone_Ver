@@ -43,9 +43,9 @@ function WebsocketHeartbeatJs({
 
 WebsocketHeartbeatJs.prototype.createWebSocket = function() {
   try {
-    if(this.ws==null){
+    if (this.ws == null) {
       this.ws = new WebSocket(
-          this.opts.url + "?token=" + StoreUtils.getAccessToken()
+        this.opts.url + "?token=" + StoreUtils.getAccessToken()
       );
       this.initEventHandle();
     }

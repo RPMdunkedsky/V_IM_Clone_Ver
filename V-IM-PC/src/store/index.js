@@ -215,7 +215,7 @@ export default new Vuex.Store({
         tempChat = new Chat(
           message.id,
           groupChat.name,
-           groupChat.avatar,
+          groupChat.avatar,
           1,
           message.content,
           //这里有问题
