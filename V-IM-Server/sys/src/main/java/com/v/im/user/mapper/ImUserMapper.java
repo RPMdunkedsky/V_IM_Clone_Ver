@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -34,4 +35,10 @@ public interface ImUserMapper extends BaseMapper<ImUser> {
      * @return 用户List
      */
     List<ImUser> getChatUserList(String chatId);
+
+    /**
+     * 根据部门分组获取人员数
+     * @return map
+     */
+    List<Map> groupByDept();
 }

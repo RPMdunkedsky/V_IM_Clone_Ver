@@ -25,6 +25,7 @@ import java.util.Map;
 
 /**
  * 用户接口类
+ *
  * @author z
  */
 @RestController
@@ -84,13 +85,27 @@ public class UserController {
 
     /**
      * 获取自己
+     *
      * @return ImUser
      */
     @RequestMapping("get")
     public ImUser get(String id) {
         ImUser imUser = imUserService.getById(id);
+        if(imUser==null){
+            return null;
+        }
         ImDept dept = iImDeptService.getById(imUser.getDeptId());
-        imUser.setDepts(iImDeptService.getDepts(dept.getParentIds())+"," + dept.getName());
+        imUser.setDepts(iImDeptService.getDepts(dept.getParentIds()) + "," + dept.getName());
         return imUser;
+    }
+
+    /**
+     * 获取部门人数
+     *
+     * @return json
+     */
+    @RequestMapping("groupByDept")
+    public Map<String, Long> groupByDept() {
+        return imUserService.groupByDept();
     }
 }

@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 服务实现类
@@ -90,5 +92,15 @@ public class ImUserServiceImpl extends ServiceImpl<ImUserMapper, ImUser> impleme
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Override
+    public Map<String, Long> groupByDept() {
+        List<Map> list =  baseMapper.groupByDept();
+        Map<String,Long> res = new HashMap<>();
+        for(Map map:list){
+            res.put((String) map.get("dept_id"),(Long)map.get("count"));
+        }
+        return res;
     }
 }

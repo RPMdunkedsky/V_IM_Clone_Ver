@@ -1,10 +1,12 @@
 package com.v.im.user.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.v.im.user.entity.ImChatGroup;
 import com.v.im.user.entity.ImUser;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户service
@@ -54,4 +56,7 @@ public interface IImUserService extends IService<ImUser> {
      * @param imUser 用户对象
      */
     void registerUser(ImUser imUser);
+
+
+    Map<String, Long> groupByDept();
 }
