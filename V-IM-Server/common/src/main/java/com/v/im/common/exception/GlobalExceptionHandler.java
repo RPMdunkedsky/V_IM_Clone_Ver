@@ -41,15 +41,5 @@ public class GlobalExceptionHandler {
     }
 
 
-    /**
-     * 处理其他异常
-     * @param e ex
-     * @return 错误信息
-     */
-    @ExceptionHandler(value =Exception.class)
-    @ResponseBody
-    public ResultBody<String> exceptionHandler(Exception e){
-        logger.error("未知异常！原因是:",e);
-        return new ResultBody<>(ResultCodeEnum.INTERNAL_SERVER_ERROR);
-    }
+
 }

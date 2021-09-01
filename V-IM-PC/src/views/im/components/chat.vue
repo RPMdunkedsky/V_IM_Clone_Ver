@@ -560,7 +560,7 @@ export default {
       padding-right: 60px;
 
       .im-chat-text {
-        margin-left: 0;
+        margin-left: 10px;
         text-align: left;
         background-color: $color-message-bg;
         color: #fff;

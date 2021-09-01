@@ -128,7 +128,6 @@ public class TioWsMsgHandler implements IWsMsgHandler {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             SendInfo sendInfo = objectMapper.readValue(text, SendInfo.class);
-            System.out.println(text);
             //心跳检测包
             if (ChatUtils.MSG_PING.equals(sendInfo.getCode())) {
                 WsResponse wsResponse = WsResponse.fromText(text, TioServerConfig.CHARSET);

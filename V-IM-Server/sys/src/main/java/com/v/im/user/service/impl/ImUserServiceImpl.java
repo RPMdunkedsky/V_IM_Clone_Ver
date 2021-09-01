@@ -78,7 +78,6 @@ public class ImUserServiceImpl extends ServiceImpl<ImUserMapper, ImUser> impleme
             imUserFriend.setUserId(imUser.getId());
             imUserFriend.setFriendId(adminId);
             //默认好友的分组
-            ImUser friend = getById(adminId);
             imUserFriendService.save(imUserFriend);
 
             //添加默认群
@@ -99,7 +98,10 @@ public class ImUserServiceImpl extends ServiceImpl<ImUserMapper, ImUser> impleme
         List<Map> list =  baseMapper.groupByDept();
         Map<String,Long> res = new HashMap<>();
         for(Map map:list){
-            res.put((String) map.get("dept_id"),(Long)map.get("count"));
+            if(map.get("dept_id")!=null){
+                res.put((String) map.get("dept_id"),(Long)map.get("count"));
+            }
+
         }
         return res;
     }
