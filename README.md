@@ -44,8 +44,8 @@
 ![组织](doc/img/7.PNG)
 
 
-### 手机版（暂未开源，进群联系技术 乐天）
-!下载地址 https://gitee.com/lele-666/V-IM/blob/master/doc/V-IM-APP.apk
+### 手机版（加微:zkp_java 务必备注：v-im）
+!测试app下载地址 https://gitee.com/lele-666/V-IM/blob/master/doc/V-IM-APP.apk
 
 ![登录](doc/mobile/1.PNG)
 ![消息列表](doc/mobile/2.PNG)
