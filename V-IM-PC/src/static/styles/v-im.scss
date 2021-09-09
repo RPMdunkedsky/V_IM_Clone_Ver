@@ -43,6 +43,10 @@ body > div {
   text-align: center;
 }
 
+/* firefox 滚动条 */
+*{
+  scrollbar-width:thin;
+}
 ::-webkit-scrollbar {
   width: 6px;
   height: 1px;
