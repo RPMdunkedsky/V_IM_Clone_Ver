@@ -255,7 +255,7 @@ class RequestUtils {
         if (message.type === MessageTargetType.FRIEND) {
           // 接受人是当前的聊天窗口
           if (
-            String(message.fromid) === String(self.$store.state.currentChat.id)
+            String(message.fromId) === String(self.$store.state.currentChat.id)
           ) {
             self.$store.commit("addMessage", message);
           } else {
@@ -263,10 +263,10 @@ class RequestUtils {
             self.$store.commit("addUnreadMessage", message);
           }
         } else if (message.type === MessageTargetType.CHAT_GROUP) {
-          // message.avatar = self.$store.state.chatMap.get(message.id);
+          // message.avatar = self.$store.state.chatMap.get(message.chatId);
           // 接受人是当前的聊天窗口
-          if (String(message.id) === String(self.$store.state.currentChat.id)) {
-            if (String(message.fromid) !== self.$store.state.user.id) {
+          if (String(message.chatId) === String(self.$store.state.currentChat.id)) {
+            if (String(message.fromId) !== self.$store.state.user.id) {
               self.$store.commit("addMessage", message);
             }
           } else {
@@ -274,7 +274,6 @@ class RequestUtils {
             self.$store.commit("addUnreadMessage", message);
           }
         }
-        console.log("currentChat", self.$store.state.currentChat);
         self.winControl.flashFrame();
         self.$store.commit("setLastMessage", message);
         // 每次滚动到最底部

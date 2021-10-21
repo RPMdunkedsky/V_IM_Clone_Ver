@@ -60,8 +60,8 @@ public class MessageController {
         SendInfo sendInfo = new SendInfo();
         sendInfo.setCode(ChatUtils.MSG_MESSAGE);
         Message message = new Message();
-        message.setId("system");
-        message.setFromid("system");
+        message.setChatId("system");
+        message.setFromId("system");
         message.setContent(msg);
         message.setMine(false);
         message.setTimestamp(System.currentTimeMillis());
@@ -83,7 +83,7 @@ public class MessageController {
     private void saveMessage(Message message, String readStatus, String userId) {
         ImMessage imMessage = new ImMessage();
         imMessage.setToId(userId);
-        imMessage.setFromId(message.getFromid());
+        imMessage.setFromId(message.getFromId());
         imMessage.setSendTime(System.currentTimeMillis());
         imMessage.setContent(message.getContent());
         imMessage.setReadStatus(readStatus);

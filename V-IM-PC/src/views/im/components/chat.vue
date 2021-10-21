@@ -243,8 +243,8 @@ export default {
             username: currentUser.name,
             timestamp: time,
             content: self.messageContent,
-            fromid: currentUser.id,
-            id: self.chat.id,
+            fromId: currentUser.id,
+            chatId: self.chat.id,
             type: self.chat.type
           };
           self.send(currentMessage);

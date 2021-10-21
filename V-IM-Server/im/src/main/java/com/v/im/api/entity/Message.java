@@ -26,7 +26,7 @@ public class Message implements Serializable {
     /**
      * 消息的来源ID（如果是私聊，则是用户id，如果是群聊，则是群组id）
      */
-    private String id;
+    private String chatId;
 
     /**
      * 消息类型 friend
@@ -51,7 +51,7 @@ public class Message implements Serializable {
     /**
      * 消息的发送者id
      */
-    private String fromid;
+    private String fromId;
 
     /**
      * 服务端时间戳毫秒数

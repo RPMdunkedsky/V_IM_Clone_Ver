@@ -140,17 +140,17 @@ public class TioWsMsgHandler implements IWsMsgHandler {
                 WsResponse wsResponse = WsResponse.fromText(objectMapper.writeValueAsString(sendInfo), TioServerConfig.CHARSET);
                 //单聊
                 if (ChatUtils.MESSAGE_TYPE_FRIEND.equals(message.getType())) {
-                    SetWithLock<ChannelContext> channelContextSetWithLock = Tio.getByUserid(channelContext.tioConfig, message.getId());
+                    SetWithLock<ChannelContext> channelContextSetWithLock = Tio.getByUserid(channelContext.tioConfig, message.getChatId());
                     //用户没有登录，存储到离线文件
                     if (channelContextSetWithLock == null || channelContextSetWithLock.size() == 0) {
                         saveMessage(message, ChatUtils.READ_TYPE_UNREAD);
                     } else {
-                        Tio.sendToUser(channelContext.tioConfig, message.getId(), wsResponse);
+                        Tio.sendToUser(channelContext.tioConfig, message.getChatId(), wsResponse);
                         //入库操作
                         saveMessage(message, ChatUtils.READ_TYPE_READ);
                     }
                 } else {
-                    Tio.sendToGroup(channelContext.tioConfig, message.getId(), wsResponse);
+                    Tio.sendToGroup(channelContext.tioConfig, message.getChatId(), wsResponse);
                     //入库操作
                     saveMessage(message, ChatUtils.READ_TYPE_READ);
                 }
@@ -178,7 +178,7 @@ public class TioWsMsgHandler implements IWsMsgHandler {
         List<ImMessage> imMessageList = iImMessageService.getUnReadMessage(channelContext.userid);
         for (ImMessage imMessage : imMessageList) {
             Message message = new Message();
-            message.setId(imMessage.getToId());
+            message.setChatId(imMessage.getToId());
             message.setMine(false);
             message.setType(imMessage.getType());
             ImUser imUser = imUserService.getById(imMessage.getFromId());
@@ -186,13 +186,13 @@ public class TioWsMsgHandler implements IWsMsgHandler {
             message.setCid(String.valueOf(imMessage.getId()));
             message.setContent(imMessage.getContent());
             message.setTimestamp(System.currentTimeMillis());
-            message.setFromid(imMessage.getFromId());
+            message.setFromId(imMessage.getFromId());
             message.setAvatar(imUser.getAvatar());
             SendInfo sendInfo1 = new SendInfo();
             sendInfo1.setCode(ChatUtils.MSG_MESSAGE);
             sendInfo1.setMessage(message);
             WsResponse wsResponse = WsResponse.fromText(objectMapper.writeValueAsString(sendInfo1), TioServerConfig.CHARSET);
-            Tio.sendToUser(channelContext.tioConfig, message.getId(), wsResponse);
+            Tio.sendToUser(channelContext.tioConfig, message.getChatId(), wsResponse);
         }
     }
 
@@ -204,8 +204,8 @@ public class TioWsMsgHandler implements IWsMsgHandler {
      */
     private void saveMessage(Message message, String readStatus) {
         ImMessage imMessage = new ImMessage();
-        imMessage.setToId(message.getId());
-        imMessage.setFromId(message.getFromid());
+        imMessage.setToId(message.getChatId());
+        imMessage.setFromId(message.getFromId());
         imMessage.setSendTime(System.currentTimeMillis());
         imMessage.setContent(message.getContent());
         imMessage.setReadStatus(readStatus);

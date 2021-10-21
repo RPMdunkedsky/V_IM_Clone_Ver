@@ -85,19 +85,19 @@ export default new Vuex.Store({
     addMessage: function(state, message) {
       message.content = transform(message.content);
       state.messageList.push(message);
-      state.messageListMap[message.id] = state.messageList;
+      state.messageListMap[message.chatId] = state.messageList;
     },
     // 在用户姓名下展示收到的最后一条信息
     setLastMessage: function(state, message) {
       let list = ChatListUtils.getChatList(state.user.id);
       let tempChatList = list.map(function(chat) {
         if (
-          String(chat.id) === String(message.fromid) &&
+          String(chat.id) === String(message.fromId) &&
           message.type === "0"
         ) {
           chat.sign = message.content;
         } else if (
-          String(chat.id) === String(message.id) &&
+          String(chat.id) === String(message.chatId) &&
           message.type === "1"
         ) {
           chat.sign = message.content;
@@ -118,23 +118,23 @@ export default new Vuex.Store({
       message.content = transform(message.content);
       if (message.type === MessageTargetType.FRIEND) {
         // 从内存中取聊天信息
-        let cacheMessages = state.messageListMap[message.fromid];
+        let cacheMessages = state.messageListMap[message.fromId];
         if (cacheMessages) {
           cacheMessages.push(message);
         } else {
           cacheMessages = [];
           cacheMessages.push(message);
-          state.messageListMap[message.fromid] = cacheMessages;
+          state.messageListMap[message.fromId] = cacheMessages;
         }
       } else {
         // 从内存中取聊天信息
-        let cacheMessages = state.messageListMap[message.id];
+        let cacheMessages = state.messageListMap[message.chatId];
         if (cacheMessages) {
           cacheMessages.push(message);
         } else {
           cacheMessages = [];
           cacheMessages.push(message);
-          state.messageListMap[message.id] = cacheMessages;
+          state.messageListMap[message.chatId] = cacheMessages;
         }
       }
     },
@@ -170,7 +170,7 @@ export default new Vuex.Store({
       for (let chat of state.chatList) {
         // 给接受消息的聊天室未读数量 +1
         if (
-          String(chat.id) === String(message.fromid) &&
+          String(chat.id) === String(message.fromId) &&
           message.type === MessageTargetType.FRIEND
         ) {
           if (!chat["unReadCount"]) {
@@ -181,14 +181,14 @@ export default new Vuex.Store({
         }
         //群组聊天
         else if (
-          String(chat.id) === String(message.id) &&
+          String(chat.id) === String(message.chatId) &&
           message.type === MessageTargetType.CHAT_GROUP
         ) {
           if (!chat["unReadCount"]) {
             chat["unReadCount"] = 0;
           }
           chat["unReadCount"] = chat["unReadCount"] + 1;
-          chat.avatar = state.chatMap[message.id].avatar;
+          chat.avatar = state.chatMap[message.chatId].avatar;
           tempChat = chat;
         } else {
           tempChatList.push(chat);
@@ -197,7 +197,7 @@ export default new Vuex.Store({
       // 聊天列表没有此人的chat
       if (!tempChat.id && message.type === MessageTargetType.FRIEND) {
         tempChat = new Chat(
-          message.fromid,
+          message.fromId,
           message.username,
           message.avatar,
           1,
@@ -211,9 +211,9 @@ export default new Vuex.Store({
         !tempChat.id &&
         message.type === MessageTargetType.CHAT_GROUP
       ) {
-        let groupChat = state.chatMap[message.id];
+        let groupChat = state.chatMap[message.chatId];
         tempChat = new Chat(
-          message.id,
+          message.chatId,
           groupChat.name,
           groupChat.avatar,
           1,

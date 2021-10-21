@@ -77,13 +77,13 @@ public class ImMessageController {
         List<Message> messageList = new ArrayList<>();
         for (ImMessage imMessage : imMessageList) {
             Message message = new Message();
-            message.setId(imMessage.getToId());
+            message.setChatId(imMessage.getToId());
             message.setMine(fromId.equals(imMessage.getFromId()));
             message.setType(imMessage.getType());
             ImUser imUser = imUserService.getById(imMessage.getFromId());
             message.setAvatar(imUser.getAvatar());
             message.setUsername(imUser.getName());
-            message.setFromid(imMessage.getFromId());
+            message.setFromId(imMessage.getFromId());
             message.setCid(String.valueOf(imMessage.getId()));
             message.setContent(imMessage.getContent());
             message.setTimestamp(imMessage.getSendTime());
