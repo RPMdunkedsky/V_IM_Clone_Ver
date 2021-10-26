@@ -32,9 +32,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/api/message")
-public class MessageController {
+public class MessageApiController {
 
-    private final Logger logger = LoggerFactory.getLogger(MessageController.class);
+    private final Logger logger = LoggerFactory.getLogger(MessageApiController.class);
 
     @Resource
     private StartTioRunner startTioRunner;
