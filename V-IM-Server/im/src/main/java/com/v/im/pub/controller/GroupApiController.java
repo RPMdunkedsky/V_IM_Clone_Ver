@@ -1,14 +1,11 @@
 package com.v.im.pub.controller;
 
-import com.v.im.tio.StartTioRunner;
-import com.v.im.user.UserUtils;
+import com.v.im.pub.service.GroupApiService;
 import com.v.im.user.entity.ImChatGroup;
-import com.v.im.user.service.IImChatGroupService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.tio.core.Tio;
-import org.tio.server.ServerTioConfig;
 
 import javax.annotation.Resource;
 
@@ -17,16 +14,11 @@ import javax.annotation.Resource;
 public class GroupApiController {
 
     @Resource
-    private StartTioRunner startTioRunner;
-
-    @Resource
-    private IImChatGroupService iImChatGroupService;
+    @Qualifier("groupApiService")
+    private GroupApiService groupApiService;
 
     @PostMapping("add")
-    public void add(ImChatGroup group) throws Exception {
-        ServerTioConfig serverTioConfig = startTioRunner.getAppStarter().getWsServerStarter().getServerTioConfig();
-        group.preInsert();
-        iImChatGroupService.save(group);
-        Tio.unbindGroup(serverTioConfig, UserUtils.getUser().getId(), group.getId());
+    public boolean add(ImChatGroup group) {
+        return groupApiService.add(group);
     }
 }
