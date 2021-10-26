@@ -1,7 +1,5 @@
 package com.v.im.user.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.v.im.common.BaseEntity;
 import com.v.im.common.TreeEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

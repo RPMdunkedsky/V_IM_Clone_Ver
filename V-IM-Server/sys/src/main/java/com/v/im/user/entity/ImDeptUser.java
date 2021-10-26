@@ -1,7 +1,6 @@
 package com.v.im.user.entity;
 
 import com.v.im.common.BaseEntity;
-import com.v.im.common.TreeEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;

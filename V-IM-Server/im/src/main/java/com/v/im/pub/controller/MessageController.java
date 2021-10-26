@@ -1,11 +1,11 @@
-package com.v.im.api.controller;
+package com.v.im.pub.controller;
 
 
-import com.v.im.api.entity.Message;
-import com.v.im.api.entity.SendInfo;
 import com.v.im.common.utils.ChatUtils;
 import com.v.im.message.entity.ImMessage;
 import com.v.im.message.service.IImMessageService;
+import com.v.im.pub.entity.Message;
+import com.v.im.pub.entity.SendInfo;
 import com.v.im.tio.StartTioRunner;
 import com.v.im.tio.TioServerConfig;
 import com.v.im.tio.WsOnlineContext;

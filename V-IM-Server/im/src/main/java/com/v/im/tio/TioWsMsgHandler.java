@@ -1,11 +1,10 @@
 package com.v.im.tio;
 
-import cn.hutool.core.util.ObjectUtil;
-import com.v.im.api.entity.Message;
-import com.v.im.api.entity.SendInfo;
 import com.v.im.common.utils.ChatUtils;
 import com.v.im.message.entity.ImMessage;
 import com.v.im.message.service.IImMessageService;
+import com.v.im.pub.entity.Message;
+import com.v.im.pub.entity.SendInfo;
 import com.v.im.user.entity.ImChatGroup;
 import com.v.im.user.entity.ImUser;
 import com.v.im.user.service.IImUserService;
@@ -20,6 +19,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.stereotype.Component;
 import org.tio.core.ChannelContext;
 import org.tio.core.Tio;
+import org.tio.core.TioConfig;
 import org.tio.http.common.HttpRequest;
 import org.tio.http.common.HttpResponse;
 import org.tio.http.common.HttpResponseStatus;
@@ -54,6 +54,8 @@ public class TioWsMsgHandler implements IWsMsgHandler {
     @Qualifier(value = "iImMessageService")
     private IImMessageService iImMessageService;
 
+    public static TioConfig tioConfig;
+
 
     /**
      * 握手时走这个方法，业务可以在这里获取cookie，request参数等
@@ -67,6 +69,7 @@ public class TioWsMsgHandler implements IWsMsgHandler {
     public HttpResponse handshake(HttpRequest request, HttpResponse httpResponse, ChannelContext channelContext) {
         String token = request.getParam("token");
         try {
+            tioConfig = channelContext.tioConfig;
             OAuth2Authentication auth2Authentication = defaultTokenServices.loadAuthentication(token);
             org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) auth2Authentication.getUserAuthentication().getPrincipal();
             String userId = imUserService.getByLoginName(user.getUsername()).getId();

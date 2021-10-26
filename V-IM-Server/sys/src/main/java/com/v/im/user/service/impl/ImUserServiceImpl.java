@@ -2,14 +2,16 @@ package com.v.im.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.v.im.user.entity.*;
+import com.v.im.user.entity.ImChatGroup;
+import com.v.im.user.entity.ImChatGroupUser;
+import com.v.im.user.entity.ImUser;
+import com.v.im.user.entity.ImUserFriend;
 import com.v.im.user.mapper.ImUserMapper;
 import com.v.im.user.service.IImChatGroupUserService;
 import com.v.im.user.service.IImUserFriendService;
 import com.v.im.user.service.IImUserService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

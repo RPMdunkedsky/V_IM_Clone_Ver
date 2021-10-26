@@ -1,6 +1,5 @@
 package com.v.im.user.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.v.im.user.entity.ImChatGroup;
 import com.v.im.user.entity.ImUser;

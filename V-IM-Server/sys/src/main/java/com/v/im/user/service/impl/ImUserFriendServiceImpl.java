@@ -5,11 +5,9 @@ import com.v.im.user.entity.ImUser;
 import com.v.im.user.entity.ImUserFriend;
 import com.v.im.user.mapper.ImUserFriendMapper;
 import com.v.im.user.service.IImUserFriendService;
-import com.v.im.user.service.IImUserService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

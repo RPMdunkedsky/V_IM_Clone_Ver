@@ -22,4 +22,15 @@ public class GroupController {
     public ImChatGroup get(String id){
         return imChatGroupService.getById(id);
     }
+
+
+    /**
+     * 创建一个群组
+     * @param imChatGroup imChatGroup
+     * @return 是否成功
+     */
+    @PostMapping(value = "/add")
+    public boolean add(ImChatGroup imChatGroup){
+
+    }
 }
