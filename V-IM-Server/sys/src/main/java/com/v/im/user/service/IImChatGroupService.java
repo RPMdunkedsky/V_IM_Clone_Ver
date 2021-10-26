@@ -13,4 +13,8 @@ import com.v.im.user.entity.ImChatGroup;
  */
 public interface IImChatGroupService extends IService<ImChatGroup> {
 
+    void addUsers(String groupId,String... userId);
+
+
+    void removeUsers(String groupId,String... userId);
 }
