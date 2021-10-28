@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResultBody<String> exceptionHandler(NullPointerException e){
         logger.error("发生空指针异常！原因是:",e);
-        return new ResultBody<>(ResultCodeEnum.BODY_NOT_MATCH);
+        return new ResultBody<>(ResultCodeEnum.NO_POINT);
     }
 
 
