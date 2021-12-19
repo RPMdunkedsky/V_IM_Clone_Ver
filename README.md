@@ -3,7 +3,7 @@
 ### 加微:zkp_java 务必备注：v-im 并且附上点赞的 gitee 用户名，不点赞不让进哦
 ### Create by  [webstorm and intellij IDEA]
 
-### 已经修复手机唤醒不能重连问题
+### ***已经修复手机唤醒不能重连问题***
 
 ### 结构
 >   1. V-IM-PC 是客户端
