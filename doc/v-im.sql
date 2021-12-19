@@ -109,49 +109,7 @@ INSERT INTO `im_dept` VALUES ('6', '技术部', '', '', '5', '0,5,', '2021-01-12
 INSERT INTO `im_dept` VALUES ('7', '综合部', '', '', '5', '0,5,', '2021-01-12 21:52:44', '2021-01-12 21:52:44', '', '0', '', '');
 INSERT INTO `im_dept` VALUES ('8', '开发部', '', '', '5', '0,5,', '2021-01-12 21:52:44', '2021-01-12 21:52:44', '', '0', '', '');
 
--- ----------------------------
--- Table structure for im_group
--- ----------------------------
-DROP TABLE IF EXISTS `im_group`;
-CREATE TABLE `im_group` (
-  `id` varchar(64) NOT NULL,
-  `user_id` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
-  `create_by` varchar(255) DEFAULT NULL,
-  `update_date` datetime DEFAULT NULL,
-  `update_by` varchar(255) DEFAULT NULL,
-  `del_flag` varchar(255) DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of im_group
--- ----------------------------
-INSERT INTO `im_group` VALUES ('04ab12ad65d54a818a6b373eb8e762c6', '79f7aaf0c50149cba5fd9bdd97f0c432', '我的好友', '2018-12-20 10:05:41', null, '2018-12-20 10:05:41', null, '0', null);
-INSERT INTO `im_group` VALUES ('0bdd1bf7fb034422a655de8866ba5a92', 'ab1bd7aa01e344c780f904b028de852b', '我的好友', '2018-12-31 17:19:02', null, '2018-12-31 17:19:02', null, '0', null);
-INSERT INTO `im_group` VALUES ('1048889640612864002', 'cb0c145a6c104497942525f8c984f9d9', '好基友', null, null, null, null, null, null);
-INSERT INTO `im_group` VALUES ('1048889640612864003', 'cb0c145a6c104497942525f8c984f9d9', '同事', null, null, null, null, null, null);
-INSERT INTO `im_group` VALUES ('1048889640612864005', 'c69787c134b04d6f8127d512c269360f', '同学', null, null, null, null, null, null);
-INSERT INTO `im_group` VALUES ('12681abf790f4adda7e0de882d8dfbfe', '83abbf3bb4b14a08a7b674d3bd35cffc', '我的好友', '2018-12-28 15:31:10', null, '2018-12-28 15:31:10', null, '0', null);
-INSERT INTO `im_group` VALUES ('1348525338006786049', '1348525337964843010', '我的好友', '2021-01-11 15:01:10', null, '2021-01-11 15:01:10', null, '0', null);
-INSERT INTO `im_group` VALUES ('1348526488223354882', '1348526488047194114', '我的好友', '2021-01-11 15:05:44', null, '2021-01-11 15:05:44', null, '0', null);
-INSERT INTO `im_group` VALUES ('1d8cd714acba4dc7843c80a36f8025fb', '6da3eb4299294a7280896fb3d6476f1d', '我的好友', '2018-12-31 17:08:04', null, '2018-12-31 17:08:04', null, '0', null);
-INSERT INTO `im_group` VALUES ('3170f72f06a84e44adb756df2e671278', '206fb75e07e84059a3d20515f4081ceb', '我的好友', '2018-12-21 10:39:23', null, '2018-12-21 10:39:23', null, '0', null);
-INSERT INTO `im_group` VALUES ('398bb1d994a944d28060d428d432225f', 'e88d9fd36e5c4896a5a17a21b37325c2', '我的好友', '2018-12-10 15:41:17', null, '2018-12-10 15:41:17', null, '0', null);
-INSERT INTO `im_group` VALUES ('55afce4962e74b168cffe438bdb46ea2', '428edf4fcf0242a49198d32845b0b1ec', '我的好友', '2018-12-31 17:19:46', null, '2018-12-31 17:19:46', null, '0', null);
-INSERT INTO `im_group` VALUES ('5e4fa5cba64c4c94a9ff7fb65e405bbf', '378770683073431eb947744fd2b390bc', '我的好友', '2018-12-30 23:45:40', null, '2018-12-30 23:45:40', null, '0', null);
-INSERT INTO `im_group` VALUES ('6c7d317ea5c74fb798b8a55eef8e335a', '2f22c4791be640b983d887899875ebbb', '我的好友', '2018-12-20 19:52:55', null, '2018-12-20 19:52:55', null, '0', null);
-INSERT INTO `im_group` VALUES ('781e2ca8f9534edfa44bc67cabad9bc1', 'c8fbea756238432584b1a79c035b3a00', '我的好友', '2018-12-24 16:29:38', null, '2018-12-24 16:29:38', null, '0', null);
-INSERT INTO `im_group` VALUES ('8683d8ba919c473da016340a7d48eb11', 'ae0b0dae35a047758ebedab7e7db4873', '我的好友', '2018-12-31 00:11:17', null, '2018-12-31 00:11:17', null, '0', null);
-INSERT INTO `im_group` VALUES ('9d003609d56546628d7ede5fc0019fd9', '69f4fd5775804abeb322e15cc7c4fd01', '我的好友', '2018-12-26 14:00:40', null, '2018-12-26 14:00:40', null, '0', null);
-INSERT INTO `im_group` VALUES ('bdd5871309b84776b75edcc8bc581a1d', '1c741437a9b14e95a7016100b00996da', '我的好友', '2018-12-27 15:34:35', null, '2018-12-27 15:34:35', null, '0', null);
-INSERT INTO `im_group` VALUES ('d06e93bb07634c3b914e44c68ec8d9f3', 'dfe980480ca7494b97c167028f1808da', '我的好友', '2018-12-26 10:50:53', null, '2018-12-26 10:50:53', null, '0', null);
-INSERT INTO `im_group` VALUES ('daef1c04d8cd4937b2d0e1a18b8a0525', '0f38e2b3dcee4cfc8abd30fb23f3c947', '我的好友', '2018-12-09 16:33:24', null, '2018-12-09 16:33:24', null, '0', null);
-INSERT INTO `im_group` VALUES ('e01d37cc0d9247209417a15221816b3a', '026e5cc22bfc4493abb49cdd5a55b4a7', '我的好友', '2018-12-19 11:13:51', null, '2018-12-19 11:13:51', null, '0', null);
-INSERT INTO `im_group` VALUES ('ec12df1f5e644084a9f17443f9d81de7', '1094c83fc3d7478b999c410e3e05abf2', '我的好友', '2018-12-22 19:05:53', null, '2018-12-22 19:05:53', null, '0', null);
-INSERT INTO `im_group` VALUES ('f8d794155dfb4dc3824fa7a702e3cc61', 'e9dcc0a3fdb04b73b755fb2be1e64369', '我的好友', '2018-12-31 17:15:06', null, '2018-12-31 17:15:06', null, '0', null);
 
 -- ----------------------------
 -- Table structure for im_message
