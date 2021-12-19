@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
@@ -44,7 +43,8 @@ public class UploadController {
         Map<String,String> res = new HashMap<>();
         try {
             String host = ChatUtils.getHost(request);
-            String fileName = UUID.randomUUID() + "." + file.getOriginalFilename().substring(Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf(".") + 1);
+            String name = file.getOriginalFilename();
+            String fileName = UUID.randomUUID() + "." +name.substring(name.lastIndexOf(".") + 1);
             File targetFile = new File(uploadPath);
             if (!targetFile.exists()) {
                 if (!targetFile.mkdirs()) {

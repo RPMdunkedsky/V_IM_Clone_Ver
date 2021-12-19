@@ -4,7 +4,6 @@ import com.v.im.pub.service.GroupApiService;
 import com.v.im.tio.StartTioRunner;
 import com.v.im.user.UserUtils;
 import com.v.im.user.entity.ImChatGroup;
-import com.v.im.user.entity.ImChatGroupUser;
 import com.v.im.user.service.IImChatGroupService;
 import com.v.im.user.service.IImChatGroupUserService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +13,6 @@ import org.tio.core.Tio;
 import org.tio.server.ServerTioConfig;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 @Service
 @Qualifier("groupApiService")
