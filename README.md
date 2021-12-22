@@ -22,7 +22,7 @@
 >   2. 打包好的web文件，在dist/web 目标下（运行的时候需要有容器，例如nginx tomcat之类的）。
 >   3. 消息推送接口，调用方式：http://localhost:8080/api/user/sendMsg?access_token=你的token&userId=接收人&msg=我是消息
 >   4. 获取token：http://localhost:8080/oauth/token?client_id=v-client&client_secret=v-client-ppp&grant_type=password&scope=select&username=wangwu&password=123456
->   5. 测试地址：http://101.200.151.183   wangwu/123456   zhangsan/123456。
+>   5. 测试地址：http://101.200.151.183 （web-pc）  http://101.200.151.183/h5/ (h5)  wangwu/123456   zhangsan/123456。
 >   6. 安装依赖命令：yarn 。
 >   7. 开发环境命令：npm run serve 和 npm run electron:serve。
 >   8. 打包安装文件：npm run electron:build，打包完成的文件在/dist_electron 下。
