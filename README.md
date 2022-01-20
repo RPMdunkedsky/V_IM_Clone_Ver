@@ -1,6 +1,6 @@
 ### 需要购买的阿里云的同学 请点击支持 [阿里云优惠券2000元](https://chuangke.aliyun.com/invite?userCode=d4l0ykh3)
 ### 务必记得点赞哦
-### 加微:zkp_java 务必备注：v-im 并且附上点赞的 gitee 用户名，不点赞不让进哦
+### 加微:zkp_java 务必备注：v-im 并且附上点赞的 gitee 用户名，不点赞不让加哦
 ### Create by  [webstorm and intellij IDEA]
 
 ### ***已经修复手机唤醒不能重连问题***
