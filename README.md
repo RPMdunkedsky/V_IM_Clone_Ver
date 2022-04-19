@@ -33,11 +33,11 @@
 
 ### 截图
 
-![消息列表/聊天](doc/img/1.PNG)
-![好友](doc/img/2.PNG)
-![组织](doc/img/3.PNG)
-![群组](doc/img/4.PNG)
-![添加好友](doc/img/5.PNG)
+![消息列表/聊天](https://gitee.com/lele-666/V-IM/raw/master/doc/img/1.png)
+![好友](https://gitee.com/lele-666/V-IM/raw/master/doc/img/2.png)
+![组织](https://gitee.com/lele-666/V-IM/raw/master/doc/img/3.png)
+![群组](https://gitee.com/lele-666/V-IM/raw/master/doc/img/4.png)
+![添加好友](https://gitee.com/lele-666/V-IM/raw/master/doc/img/5.png)
  
 
 ### 功能点
