@@ -4,7 +4,7 @@
 ### Create by  [webstorm and intellij IDEA]
 ### 说明
 >   系统是在ruoyi-vue（https://gitee.com/y_project/RuoYi-Vue）的基础上开发的，但是把数据库操作改成mybatis-plus,原先的是mybatis（如果你想完全迁移到ruoyi系统里面，可能还需要一定的工作量）。
-
+>   老版本在 old-master 分支。
 ### 结构
 >   1. V-IM-PC 是客户端
 >   2. V-IM-Server 是服务端代码
@@ -44,15 +44,12 @@
 
 ### 手机版 （改版中）
 
-![登录](doc/mobile/1.PNG)
-![消息列表](doc/mobile/2.PNG)
-![聊天](doc/mobile/3.PNG)
+![消息列表/聊天](doc/mobile/1.PNG)
+![好友](doc/mobile/2.PNG)
+![组织](doc/mobile/3.PNG)
 ![群组](doc/mobile/4.PNG)
-![好友](doc/mobile/5.PNG)
-![组织](doc/mobile/6.PNG)
-![我的](doc/mobile/7.PNG)
-![信息](doc/mobile/8.PNG)
-![群聊](doc/mobile/9.PNG)
+![添加好友](doc/mobile/5.PNG)
+
 
 ### 功能点
 1. 文本聊天
