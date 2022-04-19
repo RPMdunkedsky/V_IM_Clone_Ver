@@ -33,11 +33,11 @@
 
 ### 截图
 
-![消息列表/聊天](/lele-666/V-IM/raw/master/doc/img/1.PNG)
-![好友](/lele-666/V-IM/raw/master/doc/img/2.PNG)
-![组织](/lele-666/V-IM/raw/master/doc/img/3.PNG)
-![群组](/lele-666/V-IM/raw/master/doc/img/4.PNG)
-![添加好友](/lele-666/V-IM/raw/master/doc/img/5.PNG)
+![消息列表/聊天](doc/img/1.PNG)
+![好友](doc/img/2.PNG)
+![组织](doc/img/3.PNG)
+![群组](doc/img/4.PNG)
+![添加好友](doc/img/5.PNG)
  
 
 ### 功能点
