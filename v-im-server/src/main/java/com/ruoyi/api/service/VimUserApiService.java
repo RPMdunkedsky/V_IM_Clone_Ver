@@ -17,7 +17,7 @@ public interface VimUserApiService {
 
     int update(User user);
 
-    boolean addFriends(String friendId);
+    boolean addFriends(String friendId,String userId);
 
-    boolean delFriends(String friendId);
+    boolean delFriends(String friendId,String userId);
 }

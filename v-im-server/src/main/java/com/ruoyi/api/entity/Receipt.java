@@ -2,7 +2,7 @@ package com.ruoyi.api.entity;
 
 /**
  * 消息已读回执
- * @author lele
+ * @author 乐天
  */
 public class Receipt {
 

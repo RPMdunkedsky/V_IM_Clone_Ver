@@ -42,7 +42,6 @@ public class DeptController {
     }
 
     @GetMapping("parent")
-    @Cacheable(value = "depts:list:parent", key = "#deptId")
     public AjaxResult parent(String deptId) {
         Dept dept = vimDeptApiService.get(deptId);
         List<Dept> depts = vimDeptApiService.getDepts(dept.getParentIds());
@@ -57,7 +56,6 @@ public class DeptController {
      * @return ImDept
      */
     @GetMapping("{deptId}/users")
-    @Cacheable(value = "depts:users", key = "#deptId")
     public AjaxResult users(@PathVariable(value = "deptId") String deptId) {
         return AjaxResult.success(vimUserApiService.getByDept(deptId));
     }

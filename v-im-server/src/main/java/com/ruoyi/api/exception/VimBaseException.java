@@ -4,7 +4,7 @@ import com.ruoyi.common.exception.base.BaseException;
 
 /**
  * vim 自定义类
- * @author zkp
+ * @author 乐天kp
  */
 public class VimBaseException extends BaseException {
 

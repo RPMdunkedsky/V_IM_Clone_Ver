@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 消息处理接口
- * @author z
+ * @author 乐天
  */
 public interface VimMessageService {
 

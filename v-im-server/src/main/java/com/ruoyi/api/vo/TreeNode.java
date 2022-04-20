@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 树状菜单
- * @author zkp
+ * @author 乐天kp
  */
 public class TreeNode implements Serializable {
 

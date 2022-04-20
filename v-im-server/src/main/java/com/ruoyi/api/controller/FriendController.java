@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * @author z
+ * @author 乐天
  */
 @RestController
 @RequestMapping("/api/sys/friends")
@@ -31,7 +31,8 @@ public class FriendController {
     @PostMapping(value = "add")
     public AjaxResult add(@RequestBody String friendId){
         try {
-            return  AjaxResult.success(vimUserApiService.addFriends(friendId));
+            SysUser sysUser = SecurityUtils.getLoginUser().getUser();
+            return  AjaxResult.success(vimUserApiService.addFriends(friendId,String.valueOf(sysUser.getUserId())));
         } catch (VimBaseException e) {
             throw new VimBaseException("friend.also.add",null);
         }catch (Exception e) {
@@ -42,6 +43,7 @@ public class FriendController {
 
     @DeleteMapping(value = "delete")
     public AjaxResult delete(@RequestBody String friendId){
-        return  AjaxResult.success(vimUserApiService.delFriends(friendId));
+        SysUser sysUser = SecurityUtils.getLoginUser().getUser();
+        return  AjaxResult.success(vimUserApiService.delFriends(friendId,String.valueOf(sysUser.getUserId())));
     }
 }
