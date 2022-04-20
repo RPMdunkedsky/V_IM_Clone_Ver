@@ -6,22 +6,27 @@
 >   系统是在RuoYi-vue(https://gitee.com/y_project/RuoYi-Vue) 的基础上开发的，但是把数据库操作改成mybatis-plus,原先的是mybatis（如果你想完全迁移到RuoYi系统里面，可能还需要一定的工作量）。
 >   老版本在 old-master 分支。
 ### 结构
->   1. V-IM-PC 是客户端
->   2. V-IM-Server 是服务端代码
->   2. ruoyi-ui-vue3 是管理系统的前端代码
->   3. doc 下面有数据库。
+>   1. v-im-pc 是客户端
+>   2. v-im-server 是服务端代码
+>   3. ruoyi-ui-vue3 是管理系统的前端代码
+>   4. doc 下面有数据库
+>   5. 1、2、3都是要启动的
 
-### 常见问题
->   1. 如果出现 Parsing error: x-invalid-end-tag  vue/no-parsing-error 类似的错误，可用用 webstorm 右键src 目录 Fix eslint problems，
->   2. 安装不成功，请先执行 npm install node-sass。如果还是错误请多重试下！
->   3. 很多同学安装electron失败，导致不能打包，可以尝试用cnpm或者yarn安装，或者多重试几次。
-
-
-#### 文档
+#### v-im-pc文档
 1. 安装依赖命令：yarn 。
 2. 开发环境命令：npm run serve 和 npm run electron:serve。
 3. 打包安装文件：npm run electron:build，打包完成的文件在/dist_electron 下。
 4. 打包web文件：npm run build，打包完成的文件在/dist 下。
+5. 启动：num run serve。
+
+#### v-im-server文档
+1. 启动：直接run v-im-server 下的 VimApplication，不是ruoyi-admin下的 RuoYiApplication。
+2. 数据库配置在ruoyi-admin resources下的application-druid.yml。
+
+#### ruoyi-ui-vue3
+1. 这里是管理后台，是若依默认的UI。
+2. 启动：num run dev。
+3. 具体功能参考ruoyi
 
 ### 注意事项
 
@@ -29,6 +34,12 @@
 > 2. 使用yarn 安装依赖，npm 不是很好用，尝试过，都不能打包成功。如果yarn 不能安装依赖成功，可以多试几次！
 > 3. 基于 t-io websocket 协议， 据说能支持百万级并发，但是此项目并没有进行此方面的测试，还请知晓 ！
 > 4. 数据库mysql,缓存redis，消息聊天记录在redis里面存着，私聊key:message-{minUserID}-{maxUserId}（两个人的id肯定是大小值不一样），群聊key:message-{groupId},表im-message暂时没有用。
+
+### 常见问题
+>   1. 如果出现 Parsing error: x-invalid-end-tag  vue/no-parsing-error 类似的错误，可用用 webstorm 右键src 目录 Fix eslint problems，
+>   2. 安装不成功，请先执行 npm install node-sass。如果还是错误请多重试下！
+>   3. 很多同学安装electron失败，导致不能打包，可以尝试用cnpm或者yarn安装，或者多重试几次。
+
 
 ### 截图
 
