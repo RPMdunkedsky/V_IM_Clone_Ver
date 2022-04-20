@@ -14,8 +14,8 @@
         <div class="im-chat-main-box messages" id="message-box">
           <ul>
             <li
-              v-for="(item, index) in messageList"
-              :key="index"
+              v-for="(item) in messageList"
+              :key="item.id"
               :class="{ 'im-chat-mine': item.mine }"
             >
               <div class="im-chat-user">
@@ -86,8 +86,8 @@
         <el-scrollbar class="chat-user-list">
           <div
             class="user"
-            v-for="(item, index) in users"
-            :key="index"
+            v-for="(item) in users"
+            :key="item.id"
             @click="showUser(item)"
           >
             <avatar :img="item.avatar"></avatar>

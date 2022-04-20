@@ -4,8 +4,8 @@
       <el-row :gutter="24">
         <el-col
           :span="3"
-          v-for="(user, index) in users"
-          :key="index"
+          v-for="(user) in users"
+          :key="user.id"
           class="user"
           @click="openUser(user.id)"
         >

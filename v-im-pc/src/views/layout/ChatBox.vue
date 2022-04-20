@@ -14,7 +14,7 @@
       <el-scrollbar class="list">
         <list-item
           v-for="(chat, index) in store.chats"
-          :key="index"
+          :key="chat.id"
           :index="index"
           :id="chat.id"
           :img="chat.avatar"

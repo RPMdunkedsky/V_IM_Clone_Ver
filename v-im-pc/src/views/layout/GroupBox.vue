@@ -18,7 +18,7 @@
       <el-scrollbar class="list">
         <list-item
           v-for="(group, index) in groupStore.groupList"
-          :key="index"
+          :key="group.id"
           :id="group.id"
           :img="group.avatar"
           :username="group.name"

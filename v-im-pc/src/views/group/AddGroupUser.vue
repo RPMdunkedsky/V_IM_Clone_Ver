@@ -2,7 +2,7 @@
   <el-row class="d-row" :gutter="20">
     <el-col :span="12">
       <el-scrollbar class="list">
-        <div v-for="(item, index) in friends" :key="index" class="user">
+        <div v-for="(item) in friends" :key="item.id" class="user">
           <div class="avatar">
             <Avatar :img="item.user.avatar"></Avatar>
           </div>
@@ -15,7 +15,7 @@
     </el-col>
     <el-col :span="12">
       <el-scrollbar class="list">
-        <div v-for="(item, index) in checkedFriends" :key="index" class="user">
+        <div v-for="(item) in checkedFriends" :key="item.user.id" class="user">
           <div class="avatar">
             <Avatar :img="item.user.avatar"></Avatar>
           </div>

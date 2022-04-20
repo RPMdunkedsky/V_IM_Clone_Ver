@@ -13,7 +13,7 @@
       }}</el-descriptions-item>
       <el-descriptions-item label="邮箱">{{ user.email }}</el-descriptions-item>
       <el-descriptions-item label="部门" role="2">
-        <span v-for="(item, index) in depts" :key="index"
+        <span v-for="(item) in depts" :key="item.id"
           >{{ item.name }},</span
         >
       </el-descriptions-item>

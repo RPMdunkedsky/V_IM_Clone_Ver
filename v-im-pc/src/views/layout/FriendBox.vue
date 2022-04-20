@@ -17,7 +17,7 @@
         <add-friend :dialogVisible="showAddFriend" @close="close"></add-friend>
       </div>
       <el-scrollbar class="list">
-        <div v-for="(user, index) in friends" :key="index">
+        <div v-for="(user, index) in friends" :key="user.id">
           <list-item
             :id="user.id"
             :img="user.avatar"
