@@ -1,32 +1,33 @@
 ### 需要购买的阿里云的同学 请点击支持 [阿里云优惠券2000元](https://chuangke.aliyun.com/invite?userCode=d4l0ykh3)
-### 务必记得点赞哦
+
 ### 加微:zkp_java 务必备注：v-im 并且附上点赞的 gitee 用户名，不点赞不让加哦
 ### Create by  [webstorm and intellij IDEA]
 ### 说明
->   系统是在RuoYi-vue(https://gitee.com/y_project/RuoYi-Vue) 的基础上开发的，但是把数据库操作改成mybatis-plus,原先的是mybatis（如果你想完全迁移到RuoYi系统里面，可能还需要一定的工作量）。
->   老版本在 old-master 分支。
+>   1、此版本是个全新开发的版本，和之前的老版本除了界面相似，别的都不一样，完全不一样。主要用vue3.0 + ts开发。消息可靠性更高，如果发送人能够看到自己发送的消息，那么对方100%可达。
+>   2、系统是在RuoYi-vue(https://gitee.com/y_project/RuoYi-Vue) 的基础上开发的，但是把数据库操作改成mybatis-plus,原先的是mybatis（如果你想完全迁移到RuoYi系统里面，可能还需要一定的工作量）。
+>   3、老版本在 old-master 分支。
 ### 结构
 >   1. v-im-pc 是客户端
 >   2. v-im-server 是服务端代码
->   3. ruoyi-ui-vue3 是管理系统的前端代码
+>   3. RuoYi-ui-vue3 是管理系统的前端代码
 >   4. doc 下面有数据库
 >   5. 1、2、3都是要启动的
 
 #### v-im-pc文档
-1. 安装依赖命令：yarn 。
-2. 开发环境命令：npm run serve 和 npm run electron:serve。
-3. 打包安装文件：npm run electron:build，打包完成的文件在/dist_electron 下。
-4. 打包web文件：npm run build，打包完成的文件在/dist 下。
-5. 启动：num run serve。
+>   1. 安装依赖命令：yarn 。
+>   2. 开发环境命令：npm run serve 和 npm run electron:serve。
+>   3. 打包安装文件：npm run electron:build，打包完成的文件在/dist_electron 下。
+>   4. 打包web文件：npm run build，打包完成的文件在/dist 下。
+>   5. 启动：num run serve。
 
 #### v-im-server文档
-1. 启动：直接run v-im-server 下的 VimApplication，不是ruoyi-admin下的 RuoYiApplication。
-2. 数据库配置在ruoyi-admin resources下的application-druid.yml。
+>   1. 启动：直接run v-im-server 下的 VimApplication，不是ruoyi-admin下的 RuoYiApplication。
+>   2. 数据库配置在ruoyi-admin resources下的application-druid.yml。
 
-#### ruoyi-ui-vue3
-1. 这里是管理后台，是若依默认的UI。
-2. 启动：num run dev。
-3. 具体功能参考ruoyi
+#### RuoYi-ui-vue3文档
+>   1. 这里是管理后台，是若依默认的UI。
+>   2. 启动：num run dev。
+>   3. 具体功能参考ruoyi
 
 ### 注意事项
 
