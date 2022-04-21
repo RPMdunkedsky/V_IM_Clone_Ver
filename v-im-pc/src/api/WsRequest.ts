@@ -10,6 +10,8 @@ class WsRequest {
   lockReconnect: boolean;
   url: string | undefined;
   isConnected: boolean;
+  //是否主动关闭
+  closeByUser: boolean;
   timeout: number;
   timeoutTask: NodeJS.Timeout | null;
   reconnectTimeoutTask: NodeJS.Timeout | null;
@@ -20,6 +22,8 @@ class WsRequest {
     this.lockReconnect = false; //避免重复连接
     this.url = "";
     this.isConnected = false;
+    //是否主动关闭
+    this.closeByUser = false;
     //心跳检测
     this.timeout = 5000; //多少秒执行检测
     //检测服务器端是否还活着
@@ -47,8 +51,10 @@ class WsRequest {
 
       // 如果希望websocket连接一直保持，在close或者error上绑定重新连接方法。
       this.socket.onclose = () => {
-        this.isConnected = false;
-        this.reconnect();
+        if(!this.closeByUser){
+          this.isConnected = false;
+          this.reconnect();
+        }
       };
 
       this.socket.onerror = () => {
@@ -150,6 +156,14 @@ class WsRequest {
 
   // 手动关闭
   close(): void {
+    //主动关闭
+    if (this.timeoutTask) {
+      clearTimeout(this.timeoutTask);
+    }
+    if (this.reconnectTimeoutTask) {
+      clearTimeout(this.reconnectTimeoutTask);
+    }
+    this.closeByUser = true;
     if (this.socket) {
       this.socket.close();
     }
