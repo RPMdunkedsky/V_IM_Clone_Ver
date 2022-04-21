@@ -1,17 +1,17 @@
 <template>
   <div class="login-box">
     <Top></Top>
-    <div class="logo-box">
-      <img src="../assets/icon.png" class="logo" alt="logo" />
-    </div>
-    <el-form class="login" ref="formRef" :model="form" label-width="80px">
-      <el-form-item label="用户名">
+    <el-form class="login" ref="formRef" :model="form" label-width="60px">
+      <div class="title">
+        V-IM 登录
+      </div>
+      <el-form-item label="用户名" class="item">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
-      <el-form-item label="密码">
+      <el-form-item label="密码" class="item">
         <el-input type="password" v-model="form.password"></el-input>
       </el-form-item>
-      <el-form-item label="验证码" prop="code" v-if="captchaOnOff">
+      <el-form-item label="验证码" prop="code" v-if="captchaOnOff" class="item">
         <el-input
           v-model="form.code"
           auto-complete="off"
@@ -23,13 +23,13 @@
           <img :src="codeUrl" @click="getCode" class="login-code-img" />
         </div>
       </el-form-item>
-      <el-form-item label="主机">
+      <el-form-item label="主机" class="item">
         <el-input v-model="form.host"></el-input>
       </el-form-item>
-      <el-form-item>
+      <div class="text-right">
         <el-button type="primary" @click="submit">登录</el-button>
         <el-button>取消</el-button>
-      </el-form-item>
+      </div>
     </el-form>
   </div>
 </template>
@@ -94,6 +94,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+
 .login-box {
   background: url("../assets/bg.png") no-repeat;
   background-size: 100% 100%;
@@ -114,6 +115,14 @@ onMounted(() => {
   .login {
     width: 50rem;
     margin: 5rem auto;
+    background-color: rgba(#fff,0.5);
+    padding: 30px;
+    .title{
+      padding: 15px;
+      text-align: center;
+      font-size: 2rem;
+      color: #5fb878;
+    }
   }
 
   .login-code {
