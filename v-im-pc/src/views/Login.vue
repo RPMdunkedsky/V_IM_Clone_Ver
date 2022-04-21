@@ -114,7 +114,7 @@ onMounted(() => {
 
   .login {
     width: 50rem;
-    margin: 5rem auto;
+    margin: 10rem auto;
     background-color: rgba(#fff,0.5);
     padding: 30px;
     .title{
