@@ -89,9 +89,17 @@ public class VimMessageServiceImpl implements VimMessageService {
     @Override
     public List<Message> list(String chatId, String fromId, String type, Long pageNum, Long pageSize) {
         String key = getChatKey(fromId, chatId, type);
-        Set<String> set = redisTemplate.opsForZSet().range(key, pageNum - 1, pageSize * (pageNum) + pageNum - 1);
-        if (set != null) {
-            return set.stream().map(this::toMessage).collect(Collectors.toList());
+        if (pageNum == -1) {
+            Long count = redisTemplate.opsForZSet().count(key, 0, -1);
+            Set<String> set = redisTemplate.opsForZSet().range(key, (count - pageSize)>0?(count - pageSize):0, -1);
+            if (set != null) {
+                return set.stream().map(this::toMessage).collect(Collectors.toList());
+            }
+        } else {
+            Set<String> set = redisTemplate.opsForZSet().range(key, pageNum - 1, pageSize * (pageNum) + pageNum - 1);
+            if (set != null) {
+                return set.stream().map(this::toMessage).collect(Collectors.toList());
+            }
         }
         return new ArrayList<>();
     }
@@ -126,7 +134,7 @@ public class VimMessageServiceImpl implements VimMessageService {
         String key = getReadKey(userId, chatId);
         String value = redisTemplate.opsForValue().get(key);
         long score = -1;
-        if (value!=null&&StrUtil.isNotBlank(value)) {
+        if (value != null && StrUtil.isNotBlank(value)) {
             score = Long.parseLong(value);
         }
         Set<String> set = redisTemplate.opsForZSet().rangeByScore(chatId, score, System.currentTimeMillis());
@@ -167,6 +175,7 @@ public class VimMessageServiceImpl implements VimMessageService {
 
     /**
      * json 转 message
+     *
      * @param str str
      * @return Message;
      */

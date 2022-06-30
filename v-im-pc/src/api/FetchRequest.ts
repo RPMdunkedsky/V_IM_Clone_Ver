@@ -29,34 +29,6 @@ class FetchRequest {
   }
 
   /**
-   * 刷新token的请求方法
-   */
-  refreshToken = () => {
-    const refreshToken = Auth.getRefreshToken();
-    if (!refreshToken && refreshToken !== "undefined") {
-      AccountApi.toLogin();
-    }
-    const param: FormData = new FormData();
-    param.set("client_id", vimConfig.clientId);
-    param.set("client_secret", vimConfig.clientSecret);
-    param.set("grant_type", "refresh_token");
-    param.set("scope", vimConfig.scope);
-    param.set("refresh_token", "" + refreshToken);
-    const config: RequestInit = {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        Accept: "application/json",
-        contentType: "application/json",
-      },
-      body: param,
-    };
-    return fetch(this.getHost() + "/oauth/token", config).then((res) => {
-      return res.status !== 200 ? Promise.reject(res) : res.json();
-    });
-  };
-
-  /**
    * 请求方法
    * @param url 请求路径
    * @param params 参数
