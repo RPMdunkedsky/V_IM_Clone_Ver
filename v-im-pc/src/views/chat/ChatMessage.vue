@@ -191,7 +191,7 @@ watch(
     }
     if (n && user) {
       //第一次加载，从数据库中取100条，有序插入到聊天记录里
-      MessageApi.list(n.id, user.id, n.type, -1, 100).then((res) => {
+      MessageApi.list(n.id, user.id, n.type, 1, 10).then((res) => {
         //读取消息
         readMessage();
         res.data.messageList.forEach((item: Message) => {

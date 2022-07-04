@@ -31,7 +31,7 @@
   <el-pagination
     background
     v-model:currentPage="pageNum"
-    :page-size="100"
+    :page-size="pageSize"
     layout="prev, pager, next"
     :total="total"
     @current-change="change"
@@ -40,13 +40,14 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps, getCurrentInstance, nextTick, reactive, toRefs, watch} from "vue";
+import { defineProps, getCurrentInstance, nextTick, reactive, ref, toRefs, watch } from "vue";
 import MessageApi from "@/api/MessageApi";
 import Avatar from "@/components/Avatar.vue";
 import Time from "@/components/Time.vue";
 import ChatUtils from "@/utils/ChatUtils";
 
 const { proxy } = getCurrentInstance();
+const pageSize = ref(10);
 const props = defineProps({
   chatId: {
     type: String,
@@ -90,7 +91,7 @@ const openImageProxy = (event: any) => {
 };
 
 const change = (pageNum: number) => {
-  MessageApi.list(props.chatId, props.fromId, props.type, pageNum, 100).then(
+  MessageApi.list(props.chatId, props.fromId, props.type, pageNum, pageSize.value).then(
     (res) => {
       data.hisMessageList = res.data.messageList;
       data.total = res.data.count;
