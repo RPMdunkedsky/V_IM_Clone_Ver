@@ -89,10 +89,10 @@ public class VimMessageServiceImpl implements VimMessageService {
     @Override
     public List<Message> list(String chatId, String fromId, String type, Long pageNum, Long pageSize) {
         String key = getChatKey(fromId, chatId, type);
+        Long count = redisTemplate.opsForZSet().size(key);
         //-1 代表最新的消息，也就是最后的
         if (pageNum == -1) {
-            Long count = redisTemplate.opsForZSet().count(key, 0, -1);
-            Set<String> set = redisTemplate.opsForZSet().range(key, (count - pageSize)>0?(count - pageSize):0, -1);
+            Set<String> set = redisTemplate.opsForZSet().range(key, (count - pageSize) > 0 ? (count - pageSize) : 0, -1);
             if (set != null) {
                 List<Message> list = set.stream().map(this::toMessage).collect(Collectors.toList());
                 //加上未读消息
@@ -102,7 +102,14 @@ public class VimMessageServiceImpl implements VimMessageService {
         } else {
             Set<String> set = redisTemplate.opsForZSet().range(key, pageNum - 1, pageSize * (pageNum) + pageNum - 1);
             if (set != null) {
-                return set.stream().map(this::toMessage).collect(Collectors.toList());
+                List<Message> list = set.stream().map(this::toMessage).collect(Collectors.toList());
+                //是否最后一页
+                boolean isLast = pageNum.equals(count % pageSize == 0 ? count / pageSize : count / pageSize + 1);
+                if (isLast) {
+                    //加上未读消息
+                    list.addAll(unreadList(chatId));
+                }
+                return list;
             }
         }
         return new ArrayList<>();
