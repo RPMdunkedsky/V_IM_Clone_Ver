@@ -92,7 +92,7 @@ public class VimMessageServiceImpl implements VimMessageService {
         Set<String> set = redisTemplate.opsForZSet().reverseRange(key, pageNum - 1, pageSize * (pageNum)  - 1);
         if (set != null) {
             List<Message> list = set.stream().map(this::toMessage).collect(Collectors.toList());
-            //是否最后一页
+            //是否最新消息
             if (pageNum == 1) {
                 //加上未读消息
                 list.addAll(unreadList(chatId));
