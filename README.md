@@ -16,7 +16,7 @@
 #### v-im-pc文档
 >   1. 安装依赖命令：yarn 。
 >   2. 开发环境命令：npm run serve 和 npm run electron:serve。
->   3. 打包安装文件：npm run electron:build，打包完成的文件在/dist_electron 下。
+>   3. 打包exe安装文件：npm run electron:build，打包完成的文件在/dist_electron 下。
 >   4. 打包web文件：npm run build，打包完成的文件在/dist 下。
 >   5. 启动：num run serve。
 
@@ -37,9 +37,10 @@
 > 4. 数据库mysql,缓存redis，消息聊天记录在redis里面存着，私聊key:message-{minUserID}-{maxUserId}（两个人的id肯定是大小值不一样），群聊key:message-{groupId},表im-message暂时没有用。
 
 ### 常见问题
->   1. 如果出现 Parsing error: x-invalid-end-tag  vue/no-parsing-error 类似的错误，可用用 webstorm 右键src 目录 Fix eslint problems，
->   2. 安装不成功，请先执行 npm install node-sass。如果还是错误请多重试下！
->   3. 很多同学安装electron失败，导致不能打包，可以尝试用cnpm或者yarn安装，或者多重试几次。
+1. 如果出现 Parsing error: x-invalid-end-tag  vue/no-parsing-error 类似的错误，可用用 webstorm 右键src 目录 Fix eslint problems，
+2. 安装不成功，请先执行 npm install node-sass。如果还是错误请多重试下！
+3. 很多同学安装electron失败，导致不能打包，可以尝试用cnpm或者yarn安装，或者多重试几次。
+4. 历史记录分页第一页数据不对问题：第一页是带发送给对方的未读消息，所以第一页可能是超过每页的分页记录。
 
 
 ### 截图
