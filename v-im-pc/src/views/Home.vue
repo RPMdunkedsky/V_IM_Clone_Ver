@@ -4,7 +4,7 @@
       <ul>
         <li class="userPhoto">
           <Avatar
-            :img="currentUser.avatar"
+            :img="userStore.getUser().avatar"
             @click="userConf.show = true"
           ></Avatar>
         </li>

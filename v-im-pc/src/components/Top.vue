@@ -27,6 +27,7 @@
 import { ref } from "vue";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const winControl = process.env.VUE_APP_MODE === "web" ? require("@/hooks/webControl").default : require("@/hooks/windowControl").default;
+const isWeb = process.env.VUE_APP_MODE === "web";
 
 function min() {
   winControl.min();
@@ -44,6 +45,9 @@ function max() {
 
 function close() {
   winControl.close();
+}
+if(isWeb){
+  max();
 }
 </script>
 <style lang="scss" scoped>

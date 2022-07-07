@@ -103,6 +103,19 @@ onMounted(() => {
 
 watch(
   () => {
+    return props.show;
+  },
+  (n) => {
+    if (n) {
+      getUser();
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+watch(
+  () => {
     return props.userId;
   },
   (n) => {

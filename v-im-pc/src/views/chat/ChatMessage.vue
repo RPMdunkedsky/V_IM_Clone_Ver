@@ -120,7 +120,7 @@
   ></user-modal>
   <el-drawer v-model="showHistory" title="聊天记录" :with-header="false">
     <history-message
-      :from-id="user.id"
+      :from-id="userStore.user.id"
       :chat-id="chat.id"
       :type="chat.type"
       :showHistory="showHistory"
@@ -177,8 +177,7 @@ const chatUser = ref<User>();
 const chat = computed((): Chat => {
   return chatStore.chats[chatStore.index];
 });
-//当前用户
-const user = userStore.user;
+
 
 watch(
   chat,
@@ -189,9 +188,9 @@ watch(
         count.value = res.data.length;
       });
     }
-    if (n && user) {
+    if (n && userStore.user) {
       //第一次加载，从数据库中取100条，有序插入到聊天记录里
-      MessageApi.list(n.id, user.id, n.type, 1, 10).then((res) => {
+      MessageApi.list(n.id, userStore.user.id, n.type, 1, 10).then((res) => {
         //读取消息
         readMessage();
         res.data.messageList.forEach((item: Message) => {
@@ -221,10 +220,10 @@ const messageList = computed((): Array<Message> => {
  * 用户点击消息列表某一个人
  */
 const readMessage = () => {
-  if (user) {
+  if (userStore.user) {
     let receipt: Receipt = {
       chatId: chat.value.id,
-      userId: user.id,
+      userId: userStore.user.id,
       timestamp: new Date().getTime(),
       type: chat.value.type,
     };
@@ -247,13 +246,13 @@ const openImageProxy = (event: any) => {
 
 const messageContent = ref("");
 const mineSend = (): void => {
-  if (user) {
+  if (userStore.user) {
     if (messageContent.value && messageContent.value.trim() !== "") {
       let msg: Message = {
         chatId: chat.value.id,
-        fromId: user.id,
-        avatar: user.avatar,
-        name: user.name,
+        fromId: userStore.user.id,
+        avatar: userStore.user.avatar,
+        name: userStore.user.name,
         mine: true,
         content: messageContent.value,
         timestamp: new Date().getTime(),
