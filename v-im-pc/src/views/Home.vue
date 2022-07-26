@@ -73,6 +73,7 @@ import Auth from "@/api/Auth";
 import Message from "@/mode/Message";
 import ChatType from "@/config/ChatType";
 import ChatUtils from "@/utils/ChatUtils";
+import vimConfig from "@/config/VimConfig";
 
 const { proxy } = getCurrentInstance();
 const userStore = useUserStore();
@@ -108,7 +109,7 @@ const vimLogout = () => {
 onMounted(() => {
   if (currentUser) {
     //初始化websocket
-    proxy.$ws.init("ws://127.0.0.1:9326?token=" + Auth.getToken());
+    proxy.$ws.init("ws://"+vimConfig.host+":9326?token=" + Auth.getToken());
     //重写 onmessage 方法，收到的消息都在这里进行分发
     proxy.$ws.onmessage = (message: Message) => {
       //群聊里面，自己发的消息不再显示
