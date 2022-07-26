@@ -24,4 +24,5 @@ class MessageApi {
     return FetchRequest.get(this.url + param, true);
   }
 }
+
 export default MessageApi;

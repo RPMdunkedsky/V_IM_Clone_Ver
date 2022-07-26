@@ -57,7 +57,6 @@ import FriendApi from "@/api/FriendApi";
 import AccountApi from "@/api/AccountApi";
 import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from "@/store/userStore";
-import { ElLoading } from "element-plus";
 
 const router = useRouter();
 const route = useRoute();

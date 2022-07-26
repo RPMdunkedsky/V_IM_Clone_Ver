@@ -38,7 +38,7 @@ public interface VimMessageService {
     * @param chatId 聊天室id
     * @return List
     */
-   List<Message> unreadList(String chatId);
+   List<Message> unreadList(String chatId,String fromId);
 
    /**
     * 查询一个群的未读消息

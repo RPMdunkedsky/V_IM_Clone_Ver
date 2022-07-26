@@ -177,7 +177,7 @@ public class TioWsMsgHandler implements IWsMsgHandler {
     private void sendOffLineMessage(ChannelContext channelContext, ObjectMapper objectMapper) throws Exception {
         String userId = channelContext.userid;
         TioConfig tioConfig = channelContext.tioConfig;
-        sendMessage(tioConfig, objectMapper, vimMessageService.unreadList(userId), userId);
+        sendMessage(tioConfig, objectMapper, vimMessageService.unreadList(userId,null), userId);
         //获取用户所有的群
         List<Group> groups = vimGroupApiService.getGroups(userId);
         for (Group group : groups) {

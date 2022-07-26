@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -89,13 +91,14 @@ public class VimMessageServiceImpl implements VimMessageService {
     @Override
     public List<Message> list(String chatId, String fromId, String type, Long pageNum, Long pageSize) {
         String key = getChatKey(fromId, chatId, type);
-        Set<String> set = redisTemplate.opsForZSet().reverseRange(key, pageNum - 1, pageSize * (pageNum)  - 1);
+        Set<String> set = redisTemplate.opsForZSet().reverseRange(key, pageNum - 1, pageSize * (pageNum) - 1);
         if (set != null) {
             List<Message> list = set.stream().map(this::toMessage).collect(Collectors.toList());
+            Collections.reverse(list);
             //是否最新消息
             if (pageNum == 1) {
                 //加上未读消息
-                list.addAll(unreadList(chatId));
+                list.addAll(unreadList(chatId,fromId));
             }
             return list;
         }
@@ -106,15 +109,26 @@ public class VimMessageServiceImpl implements VimMessageService {
      * 读取未读消息
      * 未读消息只存私聊消息，群聊消息还在群列表里
      *
-     * @param chatId 聊天室id
+     * @param chatId 聊天室id = toUserId
+     * @param fromId 发送人id
      * @return List
      */
     @Override
-    public List<Message> unreadList(String chatId) {
+    public List<Message> unreadList(String chatId, String fromId) {
         String key = StrUtil.format(UNREAD_TEMPLATE, chatId);
         Set<String> set = redisTemplate.opsForZSet().range(key, 0, -1);
         if (set != null) {
-            return set.stream().map(this::toMessage).collect(Collectors.toList());
+            return set.stream().filter(str -> {
+                try {
+                    Message message = new ObjectMapper().readValue(str, Message.class);
+                    //如果发送人为空，取出所有的未读消息
+                    return StrUtil.isBlank(fromId) || message.getFromId().equals(fromId);
+                } catch (JsonProcessingException e) {
+                    log.error(e.getMessage());
+                    return false;
+                }
+
+            }).map(this::toMessage).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
